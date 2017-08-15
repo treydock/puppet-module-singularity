@@ -1,5 +1,6 @@
 # puppet-module-singularity
 
+[![Puppet Forge](http://img.shields.io/puppetforge/v/treydock/singularity.svg)](https://forge.puppetlabs.com/treydock/singularity)
 [![Build Status](https://travis-ci.org/treydock/puppet-module-singularity.png)](https://travis-ci.org/treydock/puppet-module-singularity)
 
 ####Table of Contents
