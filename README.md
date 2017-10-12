@@ -59,6 +59,7 @@ Below are parameter defaults in Hiera format:
     singularity::mount_proc: yes
     singularity::mount_sys: yes
     singularity::mount_dev: yes
+    singularity::mount_devpts: yes
     singularity::mount_home: yes
     singularity::mount_tmp: yes
     singularity::mount_hostfs: no
@@ -71,6 +72,11 @@ Below are parameter defaults in Hiera format:
     singularity::sessiondir_max_size: 16
     #singularity::limit_container_owners: undef
     #singularity::limit_container_paths: undef
+    singularity::allow_containers:
+      squashfs: yes
+      extfs: yes
+      dir: yes
+    #singularity::autofs_bug_paths: undef
 
 #####`package_ensure`
 Package ensure parameter, defaults to `present`

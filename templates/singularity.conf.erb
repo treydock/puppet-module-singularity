@@ -73,6 +73,15 @@ mount sys = <%= scope['singularity::mount_sys'] %>
 mount dev = <%= scope['singularity::mount_dev'] %>
 
 
+# MOUNT DEVPTS: [BOOL]
+# DEFAULT: yes
+# Should we mount a new instance of devpts if there is a 'minimal'
+# /dev, or -C is passed?  Note, this requires that your kernel was
+# configured with CONFIG_DEVPTS_MULTIPLE_INSTANCES=y, or that you're
+# running kernel 4.7 or newer.
+mount devpts = yes
+
+
 # MOUNT HOME: [BOOL]
 # DEFAULT: yes
 # Should we automatically determine the calling user's home directory and
@@ -121,10 +130,11 @@ bind path = <%= bind_path %>
 user bind control = <%= scope['singularity::user_bind_control'] %>
 
 
-# ENABLE OVERLAY: [BOOL]
+# ENABLE OVERLAY: [yes/no/try]
 # DEFAULT: yes
 # Enabling this option will make it possible to specify bind paths to locations
-# that do not currently exist within the container.
+# that do not currently exist within the container.  If 'try' is chosen,
+# overlayfs will be tried but if it is unavailable it will be silently ignored.
 enable overlay = <%= scope['singularity::enable_overlay'] %>
 
 
@@ -166,4 +176,26 @@ limit container owners = <%= scope['singularity::limit_container_owners'].join('
 #limit container paths = /scratch, /tmp, /global
 <%- if scope['singularity::limit_container_paths'] -%>
 limit container paths = <%= scope['singularity::limit_container_paths'].join(', ') %>
+<%- end -%>
+
+
+# ALLOW CONTAINER ${TYPE}: [BOOL]
+# DEFAULT: yes
+# This feature limits what kind of containers that Singularity will allow
+# users to use (note this does not apply for root).
+<%- scope['singularity::allow_containers'].each_pair do |type, value| -%>
+allow container <%= type %> = <%= value %>
+<%- end -%>
+
+
+# AUTOFS BUG PATH: [STRING]
+# DEFAULT: Undefined
+# Define list of autofs directories which produces "Too many levels of symbolink links"
+# errors when accessed from container (typically bind mounts)
+#autofs bug path = /nfs
+#autofs bug path = /cifs-share
+<%- if scope['singularity::autofs_bug_paths'] -%>
+<%- scope['singularity::autofs_bug_paths'].each do |autofs_bug_path| -%>
+autofs bug path = <%= autofs_bug_path %>
+<%- end -%>
 <%- end -%>
