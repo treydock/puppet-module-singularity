@@ -63,6 +63,7 @@ describe 'singularity' do
             'mount proc = yes',
             'mount sys = yes',
             'mount dev = yes',
+            'mount devpts = yes',
             'mount home = yes',
             'mount tmp = yes',
             'mount hostfs = no',
@@ -72,7 +73,9 @@ describe 'singularity' do
             "enable overlay = #{enable_overlay}",
             'mount slave = yes',
             'sessiondir max size = 16',
-            
+            'allow container squashfs = yes',
+            'allow container extfs = yes',
+            'allow container dir = yes',
           ])
         end
       end
