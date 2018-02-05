@@ -3,7 +3,7 @@ class singularity (
   String $package_ensure = 'present',
   String $package_name = $singularity::params::package_name,
   Boolean $manage_epel = true,
-  String $config_path = $singularity::params::config_path,
+  Stdlib::Absolutepath $config_path = $singularity::params::config_path,
   String $config_template = 'singularity/singularity.conf.erb',
   Enum['yes','no'] $allow_setuid  = 'yes',
   Integer $max_loop_devices = 256,
@@ -18,7 +18,7 @@ class singularity (
   Enum['yes','no'] $mount_home = 'yes',
   Enum['yes','no'] $mount_tmp = 'yes',
   Enum['yes','no'] $mount_hostfs = 'no',
-  Array $bind_paths = ['/etc/localtime', '/etc/hosts'],
+  Array[Stdlib::Absolutepath] $bind_paths = ['/etc/localtime', '/etc/hosts'],
   Enum['yes','no'] $user_bind_control = 'yes',
   Enum['yes','no','try'] $enable_overlay = 'try',
   Enum['yes','no'] $mount_slave = 'yes',
@@ -30,7 +30,7 @@ class singularity (
     'extfs' => 'yes',
     'dir' => 'yes',
   },
-  Optional[Array] $autofs_bug_paths = undef,
+  Optional[Array[Stdlib::Absolutepath]] $autofs_bug_paths = undef,
 ) inherits singularity::params {
 
   contain singularity::install

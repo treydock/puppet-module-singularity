@@ -8,7 +8,7 @@
   "issues_url": "https://github.com/treydock/puppet-module-singularity/issues",
   "project_page": "https://github.com/treydock/puppet-module-singularity",
   "dependencies": [
-    { "name": "puppetlabs/stdlib", "version_requirement": ">= 3.2.0 <5.0.0" },
+    { "name": "puppetlabs/stdlib", "version_requirement": ">= 4.13.1 <5.0.0" },
     { "name": "stahnma/epel", "version_requirement": ">= 1.0.0 <2.0.0" }
   ],
   "operatingsystem_support": [
@@ -24,6 +24,9 @@
       "operatingsystem": "Scientific",
       "operatingsystemrelease": [ "6", "7" ]
     }
+  ],
+  "requirements": [
+    {"name": "puppet", "version_requirement": ">= 4.7.0 < 6.0.0" }
   ]
 }
 
