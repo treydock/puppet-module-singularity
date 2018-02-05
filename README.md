@@ -67,7 +67,7 @@ Below are parameter defaults in Hiera format:
       - /etc/localtime
       - /etc/hosts
     singularity::user_bind_control: yes
-    singularity::enable_overlay: yes
+    singularity::enable_overlay: try
     singularity::mount_slave: yes
     singularity::sessiondir_max_size: 16
     #singularity::limit_container_owners: undef

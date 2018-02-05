@@ -16,14 +16,6 @@ describe 'singularity' do
         })
       end
 
-      case facts[:operatingsystemrelease]
-      when /^7/
-        facts[:operatingsystemrelease] = '7.3'
-        enable_overlay = 'yes'
-      else
-        enable_overlay = 'no'
-      end
-
       it { is_expected.to compile.with_all_deps }
 
       it { is_expected.to create_class('singularity') }
@@ -70,7 +62,7 @@ describe 'singularity' do
             'bind path = /etc/localtime',
             'bind path = /etc/hosts',
             'user bind control = yes',
-            "enable overlay = #{enable_overlay}",
+            'enable overlay = try',
             'mount slave = yes',
             'sessiondir max size = 16',
             'allow container squashfs = yes',
