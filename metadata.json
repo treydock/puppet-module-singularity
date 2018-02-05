@@ -3,13 +3,13 @@
   "version": "0.1.0",
   "author": "treydock",
   "summary": "singularity Puppet module",
-  "license": "Apache 2.0",
+  "license": "Apache-2.0",
   "source": "git://github.com/treydock/puppet-module-singularity.git",
   "issues_url": "https://github.com/treydock/puppet-module-singularity/issues",
   "project_page": "https://github.com/treydock/puppet-module-singularity",
   "dependencies": [
     { "name": "puppetlabs/stdlib", "version_requirement": ">= 3.2.0 <5.0.0" },
-    { "name": "stahnma/epel", "version_range": "1.x" }
+    { "name": "stahnma/epel", "version_requirement": ">= 1.0.0 <2.0.0" }
   ],
   "operatingsystem_support": [
     {

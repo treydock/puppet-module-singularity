@@ -3,7 +3,7 @@
 [![Puppet Forge](http://img.shields.io/puppetforge/v/treydock/singularity.svg)](https://forge.puppetlabs.com/treydock/singularity)
 [![Build Status](https://travis-ci.org/treydock/puppet-module-singularity.png)](https://travis-ci.org/treydock/puppet-module-singularity)
 
-####Table of Contents
+#### Table of Contents
 
 1. [Overview](#overview)
 2. [Usage - Configuration options](#usage)
@@ -78,13 +78,16 @@ Below are parameter defaults in Hiera format:
       dir: yes
     #singularity::autofs_bug_paths: undef
 
-#####`package_ensure`
+##### `package_ensure`
+
 Package ensure parameter, defaults to `present`
 
-#####`package_name`
+##### `package_name`
+
 Package name, defaults to `singularity`
 
-#####`manage_epel`
+##### `manage_epel`
+
 Determines whether to include EPEL class before installing singularity.  Defaults to `true`
 
 
