@@ -20,7 +20,7 @@ class singularity (
   Enum['yes','no'] $mount_hostfs = 'no',
   Array $bind_paths = ['/etc/localtime', '/etc/hosts'],
   Enum['yes','no'] $user_bind_control = 'yes',
-  Enum['yes','no','try'] $enable_overlay = $singularity::params::enable_overlay,
+  Enum['yes','no','try'] $enable_overlay = 'try',
   Enum['yes','no'] $mount_slave = 'yes',
   Integer $sessiondir_max_size = 16,
   Optional[Array] $limit_container_owners = undef,
