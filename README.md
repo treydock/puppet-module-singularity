@@ -71,6 +71,7 @@ singularity::enable_overlay: 'try'
 singularity::mount_slave: 'yes'
 singularity::sessiondir_max_size: 16
 #singularity::limit_container_owners: undef
+#singularity::limit_container_groups: undef
 #singularity::limit_container_paths: undef
 singularity::allow_containers:
   squashfs: 'yes'

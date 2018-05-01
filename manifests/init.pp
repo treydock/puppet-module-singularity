@@ -24,6 +24,7 @@ class singularity (
   Enum['yes','no'] $mount_slave = 'yes',
   Integer $sessiondir_max_size = 16,
   Optional[Array] $limit_container_owners = undef,
+  Optional[Array] $limit_container_groups = undef,
   Optional[Array] $limit_container_paths = undef,
   Hash[String,Enum['yes','no']] $allow_containers = {
     'squashfs' => 'yes',
