@@ -166,6 +166,18 @@ limit container owners = <%= scope['singularity::limit_container_owners'].join('
 <%- end -%>
 
 
+# LIMIT CONTAINER GROUPS: [STRING]
+# DEFAULT: NULL
+# Only allow containers to be used that are owned by a given group. If this
+# configuration is undefined (commented or set to NULL), all containers are
+# allowed to be used. This feature only applies when Singularity is running in
+# SUID mode and the user is non-root.
+#limit container groups = group1, singularity, nobody
+<%- if scope['singularity::limit_container_groups'] -%>
+limit container groups = <%= scope['singularity::limit_container_groups'].join(', ') %>
+<%- end -%>
+
+
 # LIMIT CONTAINER PATHS: [STRING]
 # DEFAULT: NULL
 # Only allow containers to be used that are located within an allowed path
