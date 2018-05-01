@@ -4,6 +4,13 @@ Release notes for the treydock-singularity module.
 
 ------------------------------------------
 
+## [1.0.1](https://github.com/treydock/puppet-module-singularity/tree/1.0.1) (2018-05-01)
+[Full Changelog](https://github.com/treydock/puppet-module-singularity/compare/1.0.0...1.0.1)
+
+**Fixed bugs:**
+
+- Fixed boolean error when using provided hiera parameters [\#4](https://github.com/treydock/puppet-module-singularity/pull/4) ([kreczko](https://github.com/kreczko))
+
 ## [1.0.0](https://github.com/treydock/puppet-module-singularity/tree/1.0.0) (2018-03-19)
 [Full Changelog](https://github.com/treydock/puppet-module-singularity/compare/0.1.0...1.0.0)
 
