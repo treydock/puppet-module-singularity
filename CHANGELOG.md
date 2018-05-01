@@ -4,6 +4,13 @@ Release notes for the treydock-singularity module.
 
 ------------------------------------------
 
+## [1.1.0](https://github.com/treydock/puppet-module-singularity/tree/1.1.0) (2018-05-01)
+[Full Changelog](https://github.com/treydock/puppet-module-singularity/compare/1.0.1...1.1.0)
+
+**Implemented enhancements:**
+
+- Add limit\_container\_groups parameter which was added in Singularity 2.5.0 [\#5](https://github.com/treydock/puppet-module-singularity/pull/5) ([treydock](https://github.com/treydock))
+
 ## [1.0.1](https://github.com/treydock/puppet-module-singularity/tree/1.0.1) (2018-05-01)
 [Full Changelog](https://github.com/treydock/puppet-module-singularity/compare/1.0.0...1.0.1)
 
