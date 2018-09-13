@@ -21,6 +21,7 @@ class singularity (
   Array[Stdlib::Absolutepath] $bind_paths = ['/etc/localtime', '/etc/hosts'],
   Enum['yes','no'] $user_bind_control = 'yes',
   Enum['yes','no','try'] $enable_overlay = 'try',
+  Enum['yes','no','try'] $enable_underlay = 'no',
   Enum['yes','no'] $mount_slave = 'yes',
   Integer $sessiondir_max_size = 16,
   Optional[Array] $limit_container_owners = undef,
@@ -32,6 +33,8 @@ class singularity (
     'dir' => 'yes',
   },
   Optional[Array[Stdlib::Absolutepath]] $autofs_bug_paths = undef,
+  Enum['tmpfs','ramfs'] $memory_fs_type = 'tmpfs',
+  Enum['yes','no'] $always_use_nv = 'no',
 ) inherits singularity::params {
 
   contain singularity::install
