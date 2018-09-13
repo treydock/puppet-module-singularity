@@ -68,6 +68,7 @@ singularity::bind_paths:
   - /etc/hosts
 singularity::user_bind_control: 'yes'
 singularity::enable_overlay: 'try'
+singularity::enable_underlay: 'try'
 singularity::mount_slave: 'yes'
 singularity::sessiondir_max_size: 16
 #singularity::limit_container_owners: undef
@@ -78,6 +79,8 @@ singularity::allow_containers:
   extfs: 'yes'
   dir: 'yes'
 #singularity::autofs_bug_paths: undef
+singularity::memory_fs_type: tmpfs
+singularity::always_use_nv: no
 ```
 
 ##### `package_ensure`

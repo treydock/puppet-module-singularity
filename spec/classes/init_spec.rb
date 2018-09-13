@@ -63,11 +63,14 @@ describe 'singularity' do
             'bind path = /etc/hosts',
             'user bind control = yes',
             'enable overlay = try',
+            'enable underlay = no',
             'mount slave = yes',
             'sessiondir max size = 16',
             'allow container squashfs = yes',
             'allow container extfs = yes',
             'allow container dir = yes',
+            'memory fs type = tmpfs',
+            'always use nv = no',
           ])
         end
       end
