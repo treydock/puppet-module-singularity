@@ -4,6 +4,14 @@ Release notes for the treydock-singularity module.
 
 ------------------------------------------
 
+## [1.2.0](https://github.com/treydock/puppet-module-singularity/tree/1.2.0) (2018-09-14)
+[Full Changelog](https://github.com/treydock/puppet-module-singularity/compare/1.1.0...1.2.0)
+
+**Implemented enhancements:**
+
+- Use beaker 4.x [\#7](https://github.com/treydock/puppet-module-singularity/pull/7) ([treydock](https://github.com/treydock))
+- Support new options of Singularity-2.6.0 [\#6](https://github.com/treydock/puppet-module-singularity/pull/6) ([mrolli](https://github.com/mrolli))
+
 ## [1.1.0](https://github.com/treydock/puppet-module-singularity/tree/1.1.0) (2018-05-01)
 [Full Changelog](https://github.com/treydock/puppet-module-singularity/compare/1.0.1...1.1.0)
 
