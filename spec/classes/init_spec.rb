@@ -69,8 +69,11 @@ describe 'singularity' do
             'allow container squashfs = yes',
             'allow container extfs = yes',
             'allow container dir = yes',
-            'memory fs type = tmpfs',
             'always use nv = no',
+            'root default capabilities = no',
+            'allow root capabilities = yes',
+            'allow user capabilities = no',
+            'memory fs type = tmpfs',
           ])
         end
       end

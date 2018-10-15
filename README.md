@@ -79,8 +79,14 @@ singularity::allow_containers:
   extfs: 'yes'
   dir: 'yes'
 #singularity::autofs_bug_paths: undef
+singularity::always_use_nv: 'no'
+singularity::root_default_capabilities: 'no'
+singularity::allow_root_capabilities: 'yes'
+singularity::allow_user_capabilities: 'no'
 singularity::memory_fs_type: tmpfs
-singularity::always_use_nv: no
+#singularity::cni_configuration_path: undef
+#singularity::cni_plugin_path: undef
+#singularity::mksquashfs_path: undef
 ```
 
 ##### `package_ensure`
