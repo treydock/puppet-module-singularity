@@ -17,6 +17,8 @@
 
 This module manages the singularity package installation and configuration of singularity.conf.
 
+**NOTE:** The `puppetlabs/yumrepo_core` Puppet module is a soft dependency if using Puppet >= 6.0.0.
+
 ## Usage
 
 ### singularity
