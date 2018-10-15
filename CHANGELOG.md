@@ -4,6 +4,14 @@ Release notes for the treydock-singularity module.
 
 ------------------------------------------
 
+## [2.0.0](https://github.com/treydock/puppet-module-singularity/tree/2.0.0) (2018-10-15)
+[Full Changelog](https://github.com/treydock/puppet-module-singularity/compare/1.2.0...2.0.0)
+
+**Implemented enhancements:**
+
+- Add support for Puppet 6 and drop support for Puppet 4 [\#9](https://github.com/treydock/puppet-module-singularity/pull/9) ([treydock](https://github.com/treydock))
+- Update singularity.conf to match 3.0.0 [\#8](https://github.com/treydock/puppet-module-singularity/pull/8) ([treydock](https://github.com/treydock))
+
 ## [1.2.0](https://github.com/treydock/puppet-module-singularity/tree/1.2.0) (2018-09-14)
 [Full Changelog](https://github.com/treydock/puppet-module-singularity/compare/1.1.0...1.2.0)
 
