@@ -4,6 +4,13 @@ Release notes for the treydock-singularity module.
 
 ------------------------------------------
 
+## [2.0.1](https://github.com/treydock/puppet-module-singularity/tree/2.0.1) (2018-10-16)
+[Full Changelog](https://github.com/treydock/puppet-module-singularity/compare/2.0.0...2.0.1)
+
+**Fixed bugs:**
+
+- Make underlay default match documented default [\#10](https://github.com/treydock/puppet-module-singularity/pull/10) ([treydock](https://github.com/treydock))
+
 ## [2.0.0](https://github.com/treydock/puppet-module-singularity/tree/2.0.0) (2018-10-15)
 [Full Changelog](https://github.com/treydock/puppet-module-singularity/compare/1.2.0...2.0.0)
 
