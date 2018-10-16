@@ -63,7 +63,7 @@ describe 'singularity' do
             'bind path = /etc/hosts',
             'user bind control = yes',
             'enable overlay = try',
-            'enable underlay = no',
+            'enable underlay = yes',
             'mount slave = yes',
             'sessiondir max size = 16',
             'allow container squashfs = yes',
