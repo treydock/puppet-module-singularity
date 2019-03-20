@@ -70,10 +70,9 @@ describe 'singularity' do
             'allow container extfs = yes',
             'allow container dir = yes',
             'always use nv = no',
-            'root default capabilities = no',
-            'allow root capabilities = yes',
-            'allow user capabilities = no',
+            'root default capabilities = full',
             'memory fs type = tmpfs',
+            'shared loop devices = no',
           ])
         end
       end
