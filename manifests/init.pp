@@ -34,13 +34,12 @@ class singularity (
   },
   Optional[Array[Stdlib::Absolutepath]] $autofs_bug_paths = undef,
   Enum['yes','no'] $always_use_nv = 'no',
-  Enum['full','file','default','no'] $root_default_capabilities = 'no',
-  Enum['yes','no'] $allow_root_capabilities = 'yes',
-  Enum['yes','no'] $allow_user_capabilities = 'no',
+  Enum['full','file','default','no'] $root_default_capabilities = 'full',
   Enum['tmpfs','ramfs'] $memory_fs_type = 'tmpfs',
   Optional[Stdlib::Absolutepath] $cni_configuration_path = undef,
   Optional[Stdlib::Absolutepath] $cni_plugin_path = undef,
   Optional[Stdlib::Absolutepath] $mksquashfs_path = undef,
+  Enum['yes','no'] $shared_loop_devices = 'no',
 ) inherits singularity::params {
 
   contain singularity::install
