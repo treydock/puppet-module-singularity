@@ -1,4 +1,5 @@
-# Private class.
+# @summary Private class
+# @api private
 class singularity::params {
 
   case $::osfamily {

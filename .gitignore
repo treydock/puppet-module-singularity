@@ -8,7 +8,6 @@ spec/fixtures/modules/
 spec/fixtures/manifests/
 .rspec_system/
 .vagrant/
-/Vagrantfile
 /log
 
 # Ruby and RVM
@@ -21,3 +20,7 @@ Gemfile.lock
 
 # Puppet module generated
 pkg/
+
+# Docs
+doc/
+.yardoc/
