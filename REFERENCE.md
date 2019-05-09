@@ -13,7 +13,6 @@ _Private Classes_
 
 * `singularity::config`: Private class
 * `singularity::install`: Private class
-* `singularity::params`: Private class
 
 ## Classes
 

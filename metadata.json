@@ -1,10 +1,10 @@
 {
   "name": "treydock-singularity",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "author": "treydock",
   "summary": "singularity Puppet module",
   "license": "Apache-2.0",
-  "source": "git://github.com/treydock/puppet-module-singularity.git",
+  "source": "https://github.com/treydock/puppet-module-singularity",
   "project_page": "https://github.com/treydock/puppet-module-singularity",
   "issues_url": "https://github.com/treydock/puppet-module-singularity/issues",
   "dependencies": [
