@@ -1,38 +1,89 @@
 ---
 language: ruby
+cache: bundler
+before_install:
+  - bundle -v
+  - rm -f Gemfile.lock
+  - gem update --system $RUBYGEMS_VERSION
+  - gem --version
+  - bundle -v
+script:
+  - 'bundle exec rake $CHECK'
 bundler_args: --without system_tests
-before_install: rm Gemfile.lock || true
-script: bundle exec rake release_checks
+rvm:
+  - 2.5.3
+stages:
+  - static
+  - spec
+  - acceptance
+  -
+    if: tag =~ ^v\d
+    name: deploy
 matrix:
   fast_finish: true
   include:
-    - rvm: 2.4.4
-      env: PUPPET_GEM_VERSION="~> 5.0" STRICT_VARIABLES="yes"
-    - rvm: 2.5.1
-      env: PUPPET_GEM_VERSION="~> 6.0" STRICT_VARIABLES="yes" FIXTURES_YML=".fixtures-puppet6.yml"
-    - rvm: 2.4.4
-      sudo: required
+    -
+      bundler_args: --with system_tests
+      dist: trusty
+      env: PUPPET_INSTALL_TYPE=agent BEAKER_debug=true BEAKER_PUPPET_COLLECTION=puppet5 BEAKER_set=centos-7 BEAKER_TESTMODE=apply
+      rvm: 2.5.3
+      script: bundle exec rake beaker
       services: docker
-      env: BEAKER_set="centos-6-x64-docker" BEAKER_PUPPET_COLLECTION="puppet5"
-      bundler_args:
-      script: sudo service docker restart ; sleep 10 ; bundle exec rake beaker
-    - rvm: 2.4.4
+      stage: acceptance
       sudo: required
+    -
+      bundler_args: --with system_tests
+      dist: trusty
+      env: PUPPET_INSTALL_TYPE=agent BEAKER_debug=true BEAKER_PUPPET_COLLECTION=puppet6 BEAKER_set=centos-7 BEAKER_TESTMODE=apply
+      rvm: 2.5.3
+      script: bundle exec rake beaker
       services: docker
-      env: BEAKER_set="centos-6-x64-docker" BEAKER_PUPPET_COLLECTION="puppet6"
-      bundler_args:
-      script: sudo service docker restart ; sleep 10 ; bundle exec rake beaker
-    - rvm: 2.4.4
+      stage: acceptance
       sudo: required
+    -
+      bundler_args: --with system_tests
+      dist: trusty
+      env: PUPPET_INSTALL_TYPE=agent BEAKER_debug=true BEAKER_PUPPET_COLLECTION=puppet5 BEAKER_set=centos-6 BEAKER_TESTMODE=apply
+      rvm: 2.5.3
+      script: bundle exec rake beaker
       services: docker
-      env: BEAKER_set="centos-7-x64-docker" BEAKER_PUPPET_COLLECTION="puppet5"
-      bundler_args:
-      script: sudo service docker restart ; sleep 10 ; bundle exec rake beaker
-    - rvm: 2.4.4
+      stage: acceptance
       sudo: required
+    -
+      bundler_args: --with system_tests
+      dist: trusty
+      env: PUPPET_INSTALL_TYPE=agent BEAKER_debug=true BEAKER_PUPPET_COLLECTION=puppet6 BEAKER_set=centos-6 BEAKER_TESTMODE=apply
+      rvm: 2.5.3
+      script: bundle exec rake beaker
       services: docker
-      env: BEAKER_set="centos-7-x64-docker" BEAKER_PUPPET_COLLECTION="puppet6"
-      bundler_args:
-      script: sudo service docker restart ; sleep 10 ; bundle exec rake beaker
+      stage: acceptance
+      sudo: required
+    -
+      env: CHECK="check:symlinks check:git_ignore check:dot_underscore check:test_file rubocop syntax lint metadata_lint"
+      stage: static
+    -
+      env: PUPPET_GEM_VERSION="~> 5.0" CHECK=parallel_spec
+      rvm: 2.4.5
+      stage: spec
+    -
+      env: PUPPET_GEM_VERSION="~> 6.0" CHECK=parallel_spec
+      rvm: 2.5.3
+      stage: spec
+    -
+      env: DEPLOY_TO_FORGE=yes
+      stage: deploy
+branches:
+  only:
+    - master
+    - /^v\d/
 notifications:
   email: false
+deploy:
+  provider: puppetforge
+  user: treydock
+  password:
+    secure: "E4xBofpdhqXW2qQEpzhkQfBi4+1lk59X2VtfgtINg1wD+/dbk5mQbDKYVrdbouhRws7GDn7E32W8SU/zHHkF7e8ce7G6GrFnlVRWMzcNtX91yreP9vJEa6VbRze1w8zeMyKWzc5TCVOJTG3lwU0Z+ul/90CJxRJyUCreiSWVObpLiYsj1zAikX6J13aynbpU1ycxsBB4+1BfrCojKQ/LtH0OC2Dnqso1f5VEXPdPvLFbsd7Z6suFWPJwWKsV51Vn+PWk6t7slch4J4aIOafEnuLOOD2E64XztoppckKGgdN8I0vP5sNeuNWvFrGszcxCdC1BolqDjXCwaVPLl3cWLw0J615K+Jt838Dprx7EkkTkG/f4guINdm2mewSPJMcualxJ+i0B09Qy2P/1pitcNiVQUUUmia3PX3zFKQPQmave7WVdIXdzbvMoWfugPWKoKedZNRBbDBw4t8pFuGccn9ZLXHsINM6bZv4qIOIKMaiqcCSFJEiJK0830B9rGyhKK2jUBp0eb/Df9prgAnPjdpvUEjGZiC/QlGb7EhysqMs2s3YsXZ62p5hgTpmQmFpk9irDWWRfvP/QJ6kOOZ0iQhmOBfFuvE820u8UeF/8awv0x8w+L/VF5wzjAkGr8PC4M0h8zVTDmFhbJz5kI48kHhvG9OsJurR1tPTguxpYmXw="
+  on:
+    tags: true
+    all_branches: true
+    condition: "$DEPLOY_TO_FORGE = yes"
