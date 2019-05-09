@@ -6,7 +6,7 @@
 <title>
   Puppet Class: singularity
   
-    &mdash; Documentation by YARD 0.9.18
+    &mdash; Documentation by YARD 0.9.19
   
 </title>
 
@@ -61,11 +61,6 @@
 
       <div id="content"><h1>Puppet Class: singularity</h1>
 <div class="box_info">
-  
-  <dl>
-    <dt>Inherits:</dt>
-    <dd><span class='object_link'><a href="singularity_3A_3Aparams.html" title="puppet_classes::singularity::params (puppet_class)">singularity::params</a></span></dd>
-  </dl>
   
   
   <dl>
@@ -805,7 +800,11 @@
 123
 124
 125
-126</pre>
+126
+127
+128
+129
+130</pre>
       </td>
       <td>
         <pre class="code"><span class="info file"># File 'manifests/init.pp', line 77</span>
@@ -851,7 +850,11 @@ class singularity (
   Optional[Stdlib::Absolutepath] $cni_plugin_path = undef,
   Optional[Stdlib::Absolutepath] $mksquashfs_path = undef,
   Enum[&#39;yes&#39;,&#39;no&#39;] $shared_loop_devices = &#39;no&#39;,
-) inherits singularity::params {
+) {
+
+  if ! $facts[&#39;os&#39;][&#39;family&#39;] in [&#39;RedHat&#39;] {
+    fail(&quot;Unsupported osfamily: ${facts[&#39;os&#39;][&#39;family&#39;]}, module ${module_name} only support osfamily RedHat&quot;)
+  }
 
   contain singularity::install
   contain singularity::config
