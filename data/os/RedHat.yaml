@@ -1,0 +1,3 @@
+---
+singularity::package_name: singularity
+singularity::config_path: /etc/singularity/singularity.conf

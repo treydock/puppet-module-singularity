@@ -15,7 +15,6 @@ describe 'singularity' do
       it { is_expected.to compile.with_all_deps }
 
       it { is_expected.to create_class('singularity') }
-      it { is_expected.to contain_class('singularity::params') }
 
       it { is_expected.to contain_class('singularity::install').that_comes_before('Class[singularity::config]') }
       it { is_expected.to contain_class('singularity::config') }
