@@ -115,7 +115,11 @@ class singularity (
   Optional[Stdlib::Absolutepath] $cni_plugin_path = undef,
   Optional[Stdlib::Absolutepath] $mksquashfs_path = undef,
   Enum['yes','no'] $shared_loop_devices = 'no',
-) inherits singularity::params {
+) {
+
+  if ! $facts['os']['family'] in ['RedHat'] {
+    fail("Unsupported osfamily: ${facts['os']['family']}, module ${module_name} only support osfamily RedHat")
+  }
 
   contain singularity::install
   contain singularity::config
