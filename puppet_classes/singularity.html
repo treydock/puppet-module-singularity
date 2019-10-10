@@ -6,7 +6,7 @@
 <title>
   Puppet Class: singularity
   
-    &mdash; Documentation by YARD 0.9.19
+    &mdash; Documentation by YARD 0.9.20
   
 </title>
 
@@ -741,6 +741,58 @@
       
     </li>
   
+    <li>
+      
+        <span class='name'>namespace_users</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>[]</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>namespace_begin_id</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>65537</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>namespace_id_range</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>65536</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>subid_template</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;singularity/subid.erb&#39;</tt>)</em>
+      
+      
+    </li>
+  
 </ul>
 
 
@@ -804,7 +856,11 @@
 127
 128
 129
-130</pre>
+130
+131
+132
+133
+134</pre>
       </td>
       <td>
         <pre class="code"><span class="info file"># File 'manifests/init.pp', line 77</span>
@@ -850,6 +906,10 @@ class singularity (
   Optional[Stdlib::Absolutepath] $cni_plugin_path = undef,
   Optional[Stdlib::Absolutepath] $mksquashfs_path = undef,
   Enum[&#39;yes&#39;,&#39;no&#39;] $shared_loop_devices = &#39;no&#39;,
+  Array $namespace_users = [],
+  Integer $namespace_begin_id = 65537,
+  Integer $namespace_id_range = 65536,
+  String $subid_template = &#39;singularity/subid.erb&#39;,
 ) {
 
   if ! $facts[&#39;os&#39;][&#39;family&#39;] in [&#39;RedHat&#39;] {

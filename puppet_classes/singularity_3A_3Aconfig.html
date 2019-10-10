@@ -6,7 +6,7 @@
 <title>
   Puppet Class: singularity::config
   
-    &mdash; Documentation by YARD 0.9.19
+    &mdash; Documentation by YARD 0.9.20
   
 </title>
 
@@ -104,7 +104,24 @@
 12
 13
 14
-15</pre>
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32</pre>
       </td>
       <td>
         <pre class="code"><span class="info file"># File 'manifests/config.pp', line 3</span>
@@ -119,6 +136,23 @@ class singularity::config {
     owner   =&gt; &#39;root&#39;,
     group   =&gt; &#39;root&#39;,
     mode    =&gt; &#39;0644&#39;,
+  }
+
+  if ! empty($::singularity::namespace_users) {
+    file { &#39;/etc/subuid&#39;:
+      ensure  =&gt; &#39;file&#39;,
+      content =&gt; template($::singularity::subid_template),
+      owner   =&gt; &#39;root&#39;,
+      group   =&gt; &#39;root&#39;,
+      mode    =&gt; &#39;0644&#39;,
+    }
+    file { &#39;/etc/subgid&#39;:
+      ensure  =&gt; &#39;file&#39;,
+      content =&gt; template($::singularity::subid_template),
+      owner   =&gt; &#39;root&#39;,
+      group   =&gt; &#39;root&#39;,
+      mode    =&gt; &#39;0644&#39;,
+    }
   }
 
 }</pre>
