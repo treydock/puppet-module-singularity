@@ -1,12 +1,7 @@
 require 'spec_helper'
 
 describe 'singularity' do
-  on_supported_os(supported_os: [
-                    {
-                      'operatingsystem' => 'RedHat',
-                      'operatingsystemrelease' => ['6', '7'],
-                    },
-                  ]).each do |os, facts|
+  on_supported_os.each do |os, facts|
     context "on #{os}" do
       let(:facts) do
         facts.merge(concat_basedir: '/dne')
@@ -18,6 +13,13 @@ describe 'singularity' do
 
       it { is_expected.to contain_class('singularity::install').that_comes_before('Class[singularity::config]') }
       it { is_expected.to contain_class('singularity::config') }
+
+      # TODO: Hack until epel module supports EPEL8
+      let(:pre_condition) do
+        if facts[:os]['release']['major'].to_i >= 8
+          "class { 'epel': epel_gpg_managed => false }"
+        end
+      end
 
       shared_examples 'singularity::install' do
         it do

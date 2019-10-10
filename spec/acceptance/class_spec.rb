@@ -3,7 +3,15 @@ require 'spec_helper_acceptance'
 describe 'singularity class:' do
   context 'default parameters' do
     it 'runs successfully' do
+      # TODO: Hack until EPEL module supports EPEL8
+      if fact('os.release.major').to_i >= 8
+        on hosts, 'puppet resource package epel-release ensure=installed'
+        epel_class = "class { 'epel': epel_gpg_managed => false }"
+      else
+        epel_class = ''
+      end
       pp = <<-EOS
+      #{epel_class}
       class { 'singularity': }
       EOS
 
