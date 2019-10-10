@@ -115,6 +115,10 @@ class singularity (
   Optional[Stdlib::Absolutepath] $cni_plugin_path = undef,
   Optional[Stdlib::Absolutepath] $mksquashfs_path = undef,
   Enum['yes','no'] $shared_loop_devices = 'no',
+  Array $namespace_users = [],
+  Integer $namespace_begin_id = 65537,
+  Integer $namespace_id_range = 65536,
+  String $subid_template = 'singularity/subid.erb',
 ) {
 
   if ! $facts['os']['family'] in ['RedHat'] {
