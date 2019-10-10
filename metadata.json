@@ -1,6 +1,6 @@
 {
   "name": "treydock-singularity",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "author": "treydock",
   "summary": "singularity Puppet module",
   "license": "Apache-2.0",

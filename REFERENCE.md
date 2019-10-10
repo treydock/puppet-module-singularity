@@ -324,3 +324,35 @@ Data type: `Enum['yes','no']`
 
 Default value: 'yes'
 
+##### `namespace_users`
+
+Data type: `Array`
+
+
+
+Default value: []
+
+##### `namespace_begin_id`
+
+Data type: `Integer`
+
+
+
+Default value: 65537
+
+##### `namespace_id_range`
+
+Data type: `Integer`
+
+
+
+Default value: 65536
+
+##### `subid_template`
+
+Data type: `String`
+
+
+
+Default value: 'singularity/subid.erb'
+

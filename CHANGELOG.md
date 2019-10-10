@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
+## [v3.2.0](https://github.com/treydock/puppet-module-singularity/tree/v3.2.0) (2019-10-10)
+
+[Full Changelog](https://github.com/treydock/puppet-module-singularity/compare/v3.1.0...v3.2.0)
+
+### Added
+
+- Add support for managing /etc/subuid and /etc/subgid [\#15](https://github.com/treydock/puppet-module-singularity/pull/15) ([treydock](https://github.com/treydock))
+
 ## [v3.1.0](https://github.com/treydock/puppet-module-singularity/tree/v3.1.0) (2019-05-09)
 
 [Full Changelog](https://github.com/treydock/puppet-module-singularity/compare/3.0.0...v3.1.0)
