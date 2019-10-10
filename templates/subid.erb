@@ -1,0 +1,6 @@
+<%- start = scope['singularity::namespace_begin_id'] -%>
+<%- range = scope['singularity::namespace_id_range'] -%>
+<%- scope['singularity::namespace_users'].each do |user| -%>
+<%= user %>:<%= start %>:<%= range %>
+<%- start = start + range + 1 -%>
+<%- end -%>
