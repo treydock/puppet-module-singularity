@@ -75,6 +75,15 @@
 #   See singularity.conf: `mksquashfs path`
 # @param shared_loop_devices
 #   See singularity.conf: `shared loop devices`
+# @param namespace_users
+#   List of uses to add to /etc/subuid and /etc/subgid to support user namespaces
+# @param namespace_begin_id
+#  The beginning ID for /etc/subuid and /etc/subgid. The value is incremented
+#  For each user by start + namespace_id_range + 1
+# @param namespace_id_range
+#   The range of UIDs/GIDs usable by a user in namespaces
+# @param subid_template
+#   The template to use for /etc/subuid and /etc/subgid
 #
 class singularity (
   String $package_ensure = 'present',
