@@ -186,6 +186,24 @@
   
     <li>
       
+        <span class='name'>allow_setuid</span>
+      
+      
+        <span class='type'>(<tt>Enum['yes','no']</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;yes&#39;</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>See singularity.conf: <code>allow setuid</code></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
         <span class='name'>max_loop_devices</span>
       
       
@@ -730,19 +748,6 @@
   
     <li>
       
-        <span class='name'>allow_setuid</span>
-      
-      
-        <span class='type'>(<tt>Enum['yes','no']</tt>)</span>
-      
-      
-        <em class="default">(defaults to: <tt>&#39;yes&#39;</tt>)</em>
-      
-      
-    </li>
-  
-    <li>
-      
         <span class='name'>namespace_users</span>
       
       
@@ -751,6 +756,12 @@
       
         <em class="default">(defaults to: <tt>[]</tt>)</em>
       
+      
+        &mdash;
+        <div class='inline'>
+<p>List of uses to add to /etc/subuid and /etc/subgid to support user
+namespaces</p>
+</div>
       
     </li>
   
@@ -765,6 +776,12 @@
         <em class="default">(defaults to: <tt>65537</tt>)</em>
       
       
+        &mdash;
+        <div class='inline'>
+<p>The beginning ID for /etc/subuid and /etc/subgid. The value is incremented
+For each user by start + namespace_id_range + 1</p>
+</div>
+      
     </li>
   
     <li>
@@ -777,6 +794,11 @@
       
         <em class="default">(defaults to: <tt>65536</tt>)</em>
       
+      
+        &mdash;
+        <div class='inline'>
+<p>The range of UIDs/GIDs usable by a user in namespaces</p>
+</div>
       
     </li>
   
@@ -791,6 +813,11 @@
         <em class="default">(defaults to: <tt>&#39;singularity/subid.erb&#39;</tt>)</em>
       
       
+        &mdash;
+        <div class='inline'>
+<p>The template to use for /etc/subuid and /etc/subgid</p>
+</div>
+      
     </li>
   
 </ul>
@@ -803,17 +830,6 @@
         <pre class="lines">
 
 
-77
-78
-79
-80
-81
-82
-83
-84
-85
-86
-87
 88
 89
 90
@@ -860,10 +876,21 @@
 131
 132
 133
-134</pre>
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145</pre>
       </td>
       <td>
-        <pre class="code"><span class="info file"># File 'manifests/init.pp', line 77</span>
+        <pre class="code"><span class="info file"># File 'manifests/init.pp', line 88</span>
 
 class singularity (
   String $package_ensure = &#39;present&#39;,
