@@ -72,6 +72,14 @@ Template used for singularity.conf
 
 Default value: 'singularity/singularity.conf.erb'
 
+##### `allow_setuid`
+
+Data type: `Enum['yes','no']`
+
+See singularity.conf: `allow setuid`
+
+Default value: 'yes'
+
 ##### `max_loop_devices`
 
 Data type: `Integer`
@@ -316,19 +324,11 @@ See singularity.conf: `shared loop devices`
 
 Default value: 'no'
 
-##### `allow_setuid`
-
-Data type: `Enum['yes','no']`
-
-
-
-Default value: 'yes'
-
 ##### `namespace_users`
 
 Data type: `Array`
 
-
+List of uses to add to /etc/subuid and /etc/subgid to support user namespaces
 
 Default value: []
 
@@ -336,7 +336,8 @@ Default value: []
 
 Data type: `Integer`
 
-
+The beginning ID for /etc/subuid and /etc/subgid. The value is incremented
+For each user by start + namespace_id_range + 1
 
 Default value: 65537
 
@@ -344,7 +345,7 @@ Default value: 65537
 
 Data type: `Integer`
 
-
+The range of UIDs/GIDs usable by a user in namespaces
 
 Default value: 65536
 
@@ -352,7 +353,7 @@ Default value: 65536
 
 Data type: `String`
 
-
+The template to use for /etc/subuid and /etc/subgid
 
 Default value: 'singularity/subid.erb'
 

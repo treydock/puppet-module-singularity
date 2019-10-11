@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
+## [v3.3.0](https://github.com/treydock/puppet-module-singularity/tree/v3.3.0) (2019-10-11)
+
+[Full Changelog](https://github.com/treydock/puppet-module-singularity/compare/v3.2.0...v3.3.0)
+
+### Added
+
+- Support EL8 [\#16](https://github.com/treydock/puppet-module-singularity/pull/16) ([treydock](https://github.com/treydock))
+
 ## [v3.2.0](https://github.com/treydock/puppet-module-singularity/tree/v3.2.0) (2019-10-10)
 
 [Full Changelog](https://github.com/treydock/puppet-module-singularity/compare/v3.1.0...v3.2.0)
@@ -18,6 +26,7 @@ All notable changes to this project will be documented in this file. The format 
 
 - Use Hiera v5 module data [\#14](https://github.com/treydock/puppet-module-singularity/pull/14) ([treydock](https://github.com/treydock))
 - Use PDK [\#13](https://github.com/treydock/puppet-module-singularity/pull/13) ([treydock](https://github.com/treydock))
+- Add support for Puppet 6 and drop support for Puppet 4 [\#9](https://github.com/treydock/puppet-module-singularity/pull/9) ([treydock](https://github.com/treydock))
 
 ## [3.0.0](https://github.com/treydock/puppet-module-singularity/tree/3.0.0) (2019-03-20)
 
@@ -42,7 +51,6 @@ All notable changes to this project will be documented in this file. The format 
 
 ### Added
 
-- Add support for Puppet 6 and drop support for Puppet 4 [\#9](https://github.com/treydock/puppet-module-singularity/pull/9) ([treydock](https://github.com/treydock))
 - Update singularity.conf to match 3.0.0 [\#8](https://github.com/treydock/puppet-module-singularity/pull/8) ([treydock](https://github.com/treydock))
 
 ## [1.2.0](https://github.com/treydock/puppet-module-singularity/tree/1.2.0) (2018-09-14)
