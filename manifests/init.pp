@@ -13,6 +13,8 @@
 #   Path to singularity.conf
 # @param config_template
 #   Template used for singularity.conf
+# @param allow_setuid
+#   See singularity.conf: `allow setuid`
 # @param max_loop_devices
 #   See singularity.conf: `max loop devices`
 # @param allow_pid_ns

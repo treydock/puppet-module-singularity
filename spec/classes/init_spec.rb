@@ -6,6 +6,12 @@ describe 'singularity' do
       let(:facts) do
         facts.merge(concat_basedir: '/dne')
       end
+      # TODO: Hack until epel module supports EPEL8
+      let(:pre_condition) do
+        if facts[:os]['release']['major'].to_i >= 8
+          "class { 'epel': epel_gpg_managed => false }"
+        end
+      end
 
       it { is_expected.to compile.with_all_deps }
 
@@ -13,13 +19,6 @@ describe 'singularity' do
 
       it { is_expected.to contain_class('singularity::install').that_comes_before('Class[singularity::config]') }
       it { is_expected.to contain_class('singularity::config') }
-
-      # TODO: Hack until epel module supports EPEL8
-      let(:pre_condition) do
-        if facts[:os]['release']['major'].to_i >= 8
-          "class { 'epel': epel_gpg_managed => false }"
-        end
-      end
 
       shared_examples 'singularity::install' do
         it do
