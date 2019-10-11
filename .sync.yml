@@ -1,6 +1,10 @@
 ---
 .travis.yml:
   docker_sets:
+    - set: centos-8
+      collection: puppet5
+    - set: centos-8
+      collection: puppet6
     - set: centos-7
       collection: puppet5
     - set: centos-7
@@ -18,6 +22,8 @@ appveyor.yml:
 spec/acceptance/nodesets/debian-8.yml:
   delete: true
 spec/acceptance/nodesets/debian-9.yml:
+  delete: true
+spec/acceptance/nodesets/debian-10.yml:
   delete: true
 spec/acceptance/nodesets/ubuntu-1404.yml:
   delete: true
