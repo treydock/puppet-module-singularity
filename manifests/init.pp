@@ -43,6 +43,8 @@
 #   See singularity.conf: `bind paths`
 # @param user_bind_control
 #   See singularity.conf: `user bind control`
+# @param enable_fusemount
+#   See singularity.conf: `enable fusemount`
 # @param enable_overlay
 #   See singularity.conf: `enable overlay`
 # @param enable_underlay
@@ -63,6 +65,8 @@
 #   See singularity.conf: `autofs bug paths`
 # @param always_use_nv
 #   See singularity.conf: `always use nv`
+# @param always_use_rocm
+#   See singularity.conf: `always use rocm`
 # @param root_default_capabilities
 #   See singularity.conf: `root default capabilities`
 # @param memory_fs_type
@@ -73,6 +77,8 @@
 #   See singularity.conf: `cni plugin path`
 # @param mksquashfs_path
 #   See singularity.conf: `mksquashfs path`
+# @param cryptsetup_path
+#   See singularity.conf: `cryptsetup path`
 # @param shared_loop_devices
 #   See singularity.conf: `shared loop devices`
 # @param namespace_users
@@ -106,6 +112,7 @@ class singularity (
   Enum['yes','no'] $mount_hostfs = 'no',
   Array[Stdlib::Absolutepath] $bind_paths = ['/etc/localtime', '/etc/hosts'],
   Enum['yes','no'] $user_bind_control = 'yes',
+  Enum['yes','no'] $enable_fusemount = 'yes',
   Enum['yes','no','try'] $enable_overlay = 'try',
   Enum['yes','no','try'] $enable_underlay = 'yes',
   Enum['yes','no'] $mount_slave = 'yes',
@@ -120,11 +127,13 @@ class singularity (
   },
   Optional[Array[Stdlib::Absolutepath]] $autofs_bug_paths = undef,
   Enum['yes','no'] $always_use_nv = 'no',
+  Enum['yes','no'] $always_use_rocm = 'no',
   Enum['full','file','default','no'] $root_default_capabilities = 'full',
   Enum['tmpfs','ramfs'] $memory_fs_type = 'tmpfs',
   Optional[Stdlib::Absolutepath] $cni_configuration_path = undef,
   Optional[Stdlib::Absolutepath] $cni_plugin_path = undef,
   Optional[Stdlib::Absolutepath] $mksquashfs_path = undef,
+  Optional[Stdlib::Absolutepath] $cryptsetup_path = undef,
   Enum['yes','no'] $shared_loop_devices = 'no',
   Array $namespace_users = [],
   Integer $namespace_begin_id = 65537,
