@@ -8,10 +8,12 @@
 # DEFAULT: yes
 # Should we allow users to utilize the setuid program flow within Singularity?
 # note1: This is the default mode, and to utilize all features, this option
-# will need to be enabled.
-# note2: If this option is disabled, it will rely on the user namespace
-# exclusively which has not been integrated equally between the different
-# Linux distributions.
+# must be enabled.  For example, without this option loop mounts of image 
+# files will not work; only sandbox image directories, which do not need loop
+# mounts, will work (subject to note 2).
+# note2: If this option is disabled, it will rely on unprivileged user
+# namespaces which have not been integrated equally between different Linux
+# distributions.
 allow setuid = <%= scope['singularity::allow_setuid'] %>
 
 # MAX LOOP DEVICES: [INT]
@@ -115,6 +117,12 @@ bind path = <%= bind_path %>
 # control is only allowed if the host also supports PR_SET_NO_NEW_PRIVS)
 user bind control = <%= scope['singularity::user_bind_control'] %>
 
+# ENABLE FUSEMOUNT: [BOOL]
+# DEFAULT: yes
+# Allow users to mount fuse filesystems inside containers with the --fusemount
+# command line option.
+enable fusemount = <%= scope['singularity::enable_fusemount'] %>
+
 # ENABLE OVERLAY: [yes/no/try]
 # DEFAULT: try
 # Enabling this option will make it possible to specify bind paths to locations
@@ -154,6 +162,7 @@ sessiondir max size = <%= scope['singularity::sessiondir_max_size'] %>
 limit container owners = <%= scope['singularity::limit_container_owners'].join(', ') %>
 <%- end -%>
 
+
 # LIMIT CONTAINER GROUPS: [STRING]
 # DEFAULT: NULL
 # Only allow containers to be used that are owned by a given group. If this
@@ -164,6 +173,7 @@ limit container owners = <%= scope['singularity::limit_container_owners'].join('
 <%- if scope['singularity::limit_container_groups'] -%>
 limit container groups = <%= scope['singularity::limit_container_groups'].join(', ') %>
 <%- end -%>
+
 
 # LIMIT CONTAINER PATHS: [STRING]
 # DEFAULT: NULL
@@ -176,6 +186,7 @@ limit container groups = <%= scope['singularity::limit_container_groups'].join('
 <%- if scope['singularity::limit_container_paths'] -%>
 limit container paths = <%= scope['singularity::limit_container_paths'].join(', ') %>
 <%- end -%>
+
 
 # ALLOW CONTAINER ${TYPE}: [BOOL]
 # DEFAULT: yes
@@ -203,6 +214,13 @@ autofs bug path = <%= autofs_bug_path %>
 # should be executed implicitely with the --nv option (useful for GPU only 
 # environments). 
 always use nv = <%= scope['singularity::always_use_nv'] %>
+
+# ALWAYS USE ROCM ${TYPE}: [BOOL]
+# DEFAULT: no
+# This feature allows an administrator to determine that every action command
+# should be executed implicitly with the --rocm option (useful for GPU only
+# environments).
+always use rocm = <%= scope['singularity::always_use_rocm'] %>
 
 # ROOT DEFAULT CAPABILITIES: [full/file/no]
 # DEFAULT: full
@@ -243,6 +261,17 @@ cni plugin path = <%= scope['singularity::cni_plugin_path'] %>
 # mksquashfs path =
 <%- if scope['singularity::mksquashfs_path'] -%>
 mksquashfs path = <%= scope['singularity::mksquashfs_path'] %>
+<%- end -%>
+
+# CRYPTSETUP PATH: [STRING]
+# DEFAULT: Undefined
+# This allows the administrator to specify the location of cryptsetup if
+# they wish to use custom location for this installation. If this value
+# is undefined, at runtime singularity falls back to the value that was
+# recorded at build time.
+# cryptsetup path =
+<%- if scope['singularity::cryptsetup_path'] -%>
+cryptsetup path = <%= scope['singularity::cryptsetup_path'] %>
 <%- end -%>
 
 # SHARED LOOP DEVICES: [BOOL]
