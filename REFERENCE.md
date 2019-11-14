@@ -192,6 +192,14 @@ See singularity.conf: `user bind control`
 
 Default value: 'yes'
 
+##### `enable_fusemount`
+
+Data type: `Enum['yes','no']`
+
+See singularity.conf: `enable fusemount`
+
+Default value: 'yes'
+
 ##### `enable_overlay`
 
 Data type: `Enum['yes','no','try']`
@@ -276,6 +284,14 @@ See singularity.conf: `always use nv`
 
 Default value: 'no'
 
+##### `always_use_rocm`
+
+Data type: `Enum['yes','no']`
+
+See singularity.conf: `always use rocm`
+
+Default value: 'no'
+
 ##### `root_default_capabilities`
 
 Data type: `Enum['full','file','default','no']`
@@ -313,6 +329,14 @@ Default value: `undef`
 Data type: `Optional[Stdlib::Absolutepath]`
 
 See singularity.conf: `mksquashfs path`
+
+Default value: `undef`
+
+##### `cryptsetup_path`
+
+Data type: `Optional[Stdlib::Absolutepath]`
+
+See singularity.conf: `cryptsetup path`
 
 Default value: `undef`
 
