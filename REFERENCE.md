@@ -266,6 +266,7 @@ Default value: {
     'squashfs' => 'yes',
     'extfs' => 'yes',
     'dir' => 'yes',
+    'encrypted' => 'yes',
   }
 
 ##### `autofs_bug_paths`
