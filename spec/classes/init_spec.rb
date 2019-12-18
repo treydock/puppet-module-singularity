@@ -62,6 +62,7 @@ describe 'singularity' do
                                   'allow container squashfs = yes',
                                   'allow container extfs = yes',
                                   'allow container dir = yes',
+                                  'allow container encrypted = yes',
                                   'always use nv = no',
                                   'always use rocm = no',
                                   'root default capabilities = full',
