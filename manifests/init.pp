@@ -124,6 +124,7 @@ class singularity (
     'squashfs' => 'yes',
     'extfs' => 'yes',
     'dir' => 'yes',
+    'encrypted' => 'yes',
   },
   Optional[Array[Stdlib::Absolutepath]] $autofs_bug_paths = undef,
   Enum['yes','no'] $always_use_nv = 'no',
