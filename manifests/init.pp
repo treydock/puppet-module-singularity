@@ -61,8 +61,6 @@
 #   See singularity.conf: `limit container paths`
 # @param allow_containers
 #   See singularity.conf: `allow containers`
-# @param autofs_bug_paths
-#   See singularity.conf: `autofs bug paths`
 # @param always_use_nv
 #   See singularity.conf: `always use nv`
 # @param always_use_rocm
@@ -77,10 +75,16 @@
 #   See singularity.conf: `cni plugin path`
 # @param mksquashfs_path
 #   See singularity.conf: `mksquashfs path`
+# @param mksquashfs_procs
+#   See singularity.conf: `mksquashfs procs`
+# @param mksquashfs_mem
+#   See singularity.conf: `mksquashfs mem`
 # @param cryptsetup_path
 #   See singularity.conf: `cryptsetup path`
 # @param shared_loop_devices
 #   See singularity.conf: `shared loop devices`
+# @param image_driver
+#   See singularity.conf: `image driver`
 # @param namespace_users
 #   List of uses to add to /etc/subuid and /etc/subgid to support user namespaces
 # @param namespace_begin_id
@@ -114,7 +118,7 @@ class singularity (
   Enum['yes','no'] $user_bind_control = 'yes',
   Enum['yes','no'] $enable_fusemount = 'yes',
   Enum['yes','no','try'] $enable_overlay = 'try',
-  Enum['yes','no','try'] $enable_underlay = 'yes',
+  Enum['yes','no','try','driver'] $enable_underlay = 'yes',
   Enum['yes','no'] $mount_slave = 'yes',
   Integer $sessiondir_max_size = 16,
   Optional[Array] $limit_container_owners = undef,
@@ -126,7 +130,6 @@ class singularity (
     'dir' => 'yes',
     'encrypted' => 'yes',
   },
-  Optional[Array[Stdlib::Absolutepath]] $autofs_bug_paths = undef,
   Enum['yes','no'] $always_use_nv = 'no',
   Enum['yes','no'] $always_use_rocm = 'no',
   Enum['full','file','default','no'] $root_default_capabilities = 'full',
@@ -134,8 +137,11 @@ class singularity (
   Optional[Stdlib::Absolutepath] $cni_configuration_path = undef,
   Optional[Stdlib::Absolutepath] $cni_plugin_path = undef,
   Optional[Stdlib::Absolutepath] $mksquashfs_path = undef,
+  Integer[0,default] $mksquashfs_procs = 0,
+  Optional[String[1]] $mksquashfs_mem = undef,
   Optional[Stdlib::Absolutepath] $cryptsetup_path = undef,
   Enum['yes','no'] $shared_loop_devices = 'no',
+  Optional[String] $image_driver = undef,
   Array $namespace_users = [],
   Integer $namespace_begin_id = 65537,
   Integer $namespace_id_range = 65536,
