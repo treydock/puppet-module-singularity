@@ -67,7 +67,9 @@ describe 'singularity' do
                                   'always use rocm = no',
                                   'root default capabilities = full',
                                   'memory fs type = tmpfs',
+                                  'mksquashfs procs = 0',
                                   'shared loop devices = no',
+                                  'image driver =',
                                 ])
         end
 

@@ -35,8 +35,9 @@ Install and configure singularity:
 
 This module has been tested on:
 
-* CentOS 6 x86_64
-* CentOS 7 x86_64
+* RedHat/CentOS 6 x86_64
+* RedHat/CentOS 7 x86_64
+* RedHat/CentOS 8 x86_64
 
 ## Development
 
@@ -53,14 +54,8 @@ Install gem dependencies
 
 Run unit tests
 
-    bundle exec rake test
+    bundle exec rake spec
 
 If you have Vagrant >= 1.2.0 installed you can run system tests
 
     bundle exec rake beaker
-
-## TODO
-
-## Further Information
-
-*
