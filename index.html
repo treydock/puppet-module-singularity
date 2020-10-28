@@ -6,15 +6,15 @@
 <title>
   File: README
   
-    &mdash; Documentation by YARD 0.9.20
+    &mdash; Documentation by YARD 0.9.25
   
 </title>
 
-  <link rel="stylesheet" href="css/style.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="css/style.css" type="text/css" />
 
-  <link rel="stylesheet" href="css/common.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="css/common.css" type="text/css" />
 
-<script type="text/javascript" charset="utf-8">
+<script type="text/javascript">
   pathId = "";
   relpath = '';
 </script>
@@ -110,9 +110,11 @@ href="http://treydock.github.io/puppet-module-singularity/">treydock.github.io/p
 
 <p>This module has been tested on:</p>
 <ul><li>
-<p>CentOS 6 x86_64</p>
+<p>RedHat/CentOS 6 x86_64</p>
 </li><li>
-<p>CentOS 7 x86_64</p>
+<p>RedHat/CentOS 7 x86_64</p>
+</li><li>
+<p>RedHat/CentOS 8 x86_64</p>
 </li></ul>
 
 <h2 id="label-Development">Development</h2>
@@ -133,19 +135,13 @@ href="http://treydock.github.io/puppet-module-singularity/">treydock.github.io/p
 
 <p>Run unit tests</p>
 
-<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_bundle'>bundle</span> <span class='id identifier rubyid_exec'>exec</span> <span class='id identifier rubyid_rake'>rake</span> <span class='id identifier rubyid_test'>test</span>
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_bundle'>bundle</span> <span class='id identifier rubyid_exec'>exec</span> <span class='id identifier rubyid_rake'>rake</span> <span class='id identifier rubyid_spec'>spec</span>
 </code></pre>
 
 <p>If you have Vagrant &gt;= 1.2.0 installed you can run system tests</p>
 
 <pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_bundle'>bundle</span> <span class='id identifier rubyid_exec'>exec</span> <span class='id identifier rubyid_rake'>rake</span> <span class='id identifier rubyid_beaker'>beaker</span>
 </code></pre>
-
-<h2 id="label-TODO">TODO</h2>
-
-<h2 id="label-Further+Information">Further Information</h2>
-
-<p>*</p>
 </div></div>
 
       <div id="footer">
