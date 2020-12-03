@@ -1,20 +1,4 @@
 ---
-.travis.yml:
-  docker_sets:
-    - set: centos-8
-      collection: puppet5
-    - set: centos-8
-      collection: puppet6
-    - set: centos-7
-      collection: puppet5
-    - set: centos-7
-      collection: puppet6
-    - set: centos-6
-      collection: puppet5
-    - set: centos-6
-      collection: puppet6
-  user: treydock
-  secure: "bynIbFymcwqhIoNPM7jpLo+ydXP3/23cmoWNHU6lfvubS5uXDy1MYQ2FW5DAjsRDcaQd6N7wDrBWiJ8NSn8sxt3ignW+lIESqM7kD//DJ1dTvrRKiqJMHbPhww/xO1C6sSJHiKfOl52qXw4saoKB7w5WmNJyNCeOLhzixiQ59Zl7ybgxoW5kdNvpeF+qW7F5RAmH3D4p3C9lKNENqS1cYai2ny/SMWWaEdoh+E1uXOdWOT42M+7BWapAwqJZvF51tlAFkreLR9uuSzh9wau1P7j95h0aT/4X0ZS+gvzNOV21x22imkZ6I8X63X3Qlv0ejSZb/prq9mtd1zmtSZM9YmhKsqWERNGWDatKJfYn/gf+TGPT+0B9A4Y4ET4yADRPh97MRw5CCjVhjXgA8FWdvRRMggJlNc9taKIeyuQO3cvbu2Q+v0y3YvdqEmLZRAe2TeUBX2wocP7YzhbxBcRf+cPo08/hRpNfJ3hYuL/putAXYgPMOmL9IBhcvyXjpdmdMajCuLEPdzoFo/dCRqTlCx5CLP/rK+geDucpczM7+PnAVIdlcbZxvy/YVb3ruMx8x51OhQ2YZ98U6hcqQAjnE/SnHfXtnEVFLsIeho0qadbe0xKPyLcqKZYqJv0V7mXbSHI1qK5AGUE/SFarUuGRTTyIODuLJ41D4SbYBSYdS60="
 .gitlab-ci.yml:
   delete: true
 appveyor.yml:
