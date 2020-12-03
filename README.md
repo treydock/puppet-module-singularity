@@ -1,7 +1,7 @@
 # puppet-module-singularity
 
 [![Puppet Forge](http://img.shields.io/puppetforge/v/treydock/singularity.svg)](https://forge.puppetlabs.com/treydock/singularity)
-[![Build Status](https://travis-ci.org/treydock/puppet-module-singularity.png)](https://travis-ci.org/treydock/puppet-module-singularity)
+[![CI Status](https://github.com/treydock/puppet-module-singularity/workflows/CI/badge.svg?branch=master)](https://github.com/treydock/puppet-module-singularity/actions?query=workflow%3ACI)
 
 #### Table of Contents
 
