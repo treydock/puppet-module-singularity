@@ -1,0 +1,10 @@
+---
+singularity::install_method: source
+singularity::source_dependencies:
+  - build-essential
+  - uuid-dev
+  - libgpgme-dev
+  - squashfs-tools
+  - libseccomp-dev
+  - pkg-config
+  - cryptsetup-bin

@@ -6,28 +6,54 @@ describe 'singularity' do
       let(:facts) do
         facts.merge(concat_basedir: '/dne')
       end
-      # TODO: Hack until epel module supports EPEL8
-      let(:pre_condition) do
-        if facts[:os]['release']['major'].to_i >= 8
-          "class { 'epel': epel_gpg_managed => false }"
-        end
-      end
 
       it { is_expected.to compile.with_all_deps }
 
       it { is_expected.to create_class('singularity') }
 
-      it { is_expected.to contain_class('singularity::install').that_comes_before('Class[singularity::config]') }
-      it { is_expected.to contain_class('singularity::config') }
-
-      shared_examples 'singularity::install' do
+      context 'singularity::install::package', if: facts[:os]['family'] == 'RedHat' do
+        it { is_expected.to contain_class('singularity::install::package').that_comes_before('Class[singularity::config]') }
+        it { is_expected.not_to contain_class('singularity::install::source') }
+        it { is_expected.to contain_class('epel').that_comes_before('Package[singularity]') }
         it do
-          is_expected.to contain_package('singularity').only_with(ensure: 'present',
-                                                                  name: 'singularity')
+          is_expected.to contain_package('singularity').only_with(
+            ensure: 'present',
+            name: 'singularity',
+          )
+        end
+      end
+
+      context 'singularity::install::source', if: facts[:os]['family'] == 'Debian' do
+        it { is_expected.not_to contain_class('singularity::install::package') }
+        it { is_expected.to contain_class('singularity::install::source').that_comes_before('Class[singularity::config]') }
+
+        it do
+          verify_contents(catalogue, 'singularity-mconfig', [
+                            './mconfig --prefix=/usr --localstatedir=/var --sysconfdir=/etc',
+                          ])
+        end
+
+        context 'with build flags provided' do
+          let(:params) do
+            {
+              build_flags: {
+                'without-suid' => true,
+                'prefix' => '/opt/singularity',
+              },
+            }
+          end
+
+          it do
+            verify_contents(catalogue, 'singularity-mconfig', [
+                              './mconfig --prefix=/opt/singularity --localstatedir=/var --sysconfdir=/etc --without-suid',
+                            ])
+          end
         end
       end
 
       context 'singularity::config' do
+        it { is_expected.to contain_class('singularity::config') }
+
         it do
           is_expected.to contain_file('singularity.conf').with(ensure: 'file',
                                                                path: '/etc/singularity/singularity.conf',
