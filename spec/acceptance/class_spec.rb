@@ -4,7 +4,10 @@ describe 'singularity class:' do
   context 'default parameters' do
     it 'runs successfully' do
       pp = <<-EOS
-      include singularity
+      class { 'singularity':
+        # Avoid /etc/localtime which may not exist in minimal Docker environments
+        bind_paths => ['/etc/hosts'],
+      }
       EOS
 
       apply_manifest(pp, catch_failures: true)
