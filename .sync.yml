@@ -6,10 +6,11 @@
       - centos-8
       - debian-9
       - debian-10
-      - ubuntu-1604
       - ubuntu-1804
       - ubuntu-2004
 .gitlab-ci.yml:
   delete: true
 appveyor.yml:
+  delete: true
+spec/acceptance/nodesets/ubuntu-1604.yml:
   delete: true
