@@ -13,11 +13,12 @@
 #### Private Classes
 
 * `singularity::config`: Private class
-* `singularity::install`: Private class
+* `singularity::install::package`: Private class
+* `singularity::install::source`: Private class
 
 ## Classes
 
-### `singularity`
+### <a name="singularity"></a>`singularity`
 
 Manage Singularity
 
@@ -31,41 +32,199 @@ include ::singularity
 
 #### Parameters
 
-The following parameters are available in the `singularity` class.
+The following parameters are available in the `singularity` class:
 
-##### `package_ensure`
+* [`install_method`](#install_method)
+* [`package_ensure`](#package_ensure)
+* [`package_name`](#package_name)
+* [`manage_epel`](#manage_epel)
+* [`version`](#version)
+* [`source_dependencies`](#source_dependencies)
+* [`manage_go`](#manage_go)
+* [`source_base_dir`](#source_base_dir)
+* [`build_flags`](#build_flags)
+* [`build_env`](#build_env)
+* [`prefix`](#prefix)
+* [`localstatedir`](#localstatedir)
+* [`sysconfdir`](#sysconfdir)
+* [`source_exec_path`](#source_exec_path)
+* [`config_path`](#config_path)
+* [`config_template`](#config_template)
+* [`allow_setuid`](#allow_setuid)
+* [`max_loop_devices`](#max_loop_devices)
+* [`allow_pid_ns`](#allow_pid_ns)
+* [`config_passwd`](#config_passwd)
+* [`config_group`](#config_group)
+* [`config_resolv_conf`](#config_resolv_conf)
+* [`mount_proc`](#mount_proc)
+* [`mount_sys`](#mount_sys)
+* [`mount_dev`](#mount_dev)
+* [`mount_devpts`](#mount_devpts)
+* [`mount_home`](#mount_home)
+* [`mount_tmp`](#mount_tmp)
+* [`mount_hostfs`](#mount_hostfs)
+* [`bind_paths`](#bind_paths)
+* [`user_bind_control`](#user_bind_control)
+* [`enable_fusemount`](#enable_fusemount)
+* [`enable_overlay`](#enable_overlay)
+* [`enable_underlay`](#enable_underlay)
+* [`mount_slave`](#mount_slave)
+* [`sessiondir_max_size`](#sessiondir_max_size)
+* [`limit_container_owners`](#limit_container_owners)
+* [`limit_container_groups`](#limit_container_groups)
+* [`limit_container_paths`](#limit_container_paths)
+* [`allow_containers`](#allow_containers)
+* [`always_use_nv`](#always_use_nv)
+* [`always_use_rocm`](#always_use_rocm)
+* [`root_default_capabilities`](#root_default_capabilities)
+* [`memory_fs_type`](#memory_fs_type)
+* [`cni_configuration_path`](#cni_configuration_path)
+* [`cni_plugin_path`](#cni_plugin_path)
+* [`mksquashfs_path`](#mksquashfs_path)
+* [`mksquashfs_procs`](#mksquashfs_procs)
+* [`mksquashfs_mem`](#mksquashfs_mem)
+* [`cryptsetup_path`](#cryptsetup_path)
+* [`shared_loop_devices`](#shared_loop_devices)
+* [`image_driver`](#image_driver)
+* [`namespace_users`](#namespace_users)
+* [`namespace_begin_id`](#namespace_begin_id)
+* [`namespace_id_range`](#namespace_id_range)
+* [`subid_template`](#subid_template)
+
+##### <a name="install_method"></a>`install_method`
+
+Data type: `Enum['package','source']`
+
+Sets how Singularity will be installed
+
+Default value: `'package'`
+
+##### <a name="package_ensure"></a>`package_ensure`
 
 Data type: `String`
 
 Package ensure property
+Only used when install_method=package
 
 Default value: `'present'`
 
-##### `package_name`
+##### <a name="package_name"></a>`package_name`
 
 Data type: `String`
 
 Singularity package name
+Only used when install_method=package
 
-Default value: `$singularity::params::package_name`
+Default value: `'singularity'`
 
-##### `manage_epel`
+##### <a name="manage_epel"></a>`manage_epel`
 
 Data type: `Boolean`
 
 Determines if EPEL repo should be managed
+Only used when install_method=package on RedHat based systems
 
 Default value: ``true``
 
-##### `config_path`
+##### <a name="version"></a>`version`
+
+Data type: `String`
+
+Version of Singularity to install
+Only used when install_method=source
+
+Default value: `'3.7.1'`
+
+##### <a name="source_dependencies"></a>`source_dependencies`
+
+Data type: `Array`
+
+Packages needed to build from source
+Only used when install_method=source
+
+Default value: `[]`
+
+##### <a name="manage_go"></a>`manage_go`
+
+Data type: `Boolean`
+
+Sets if golang module should be included
+Only used when install_method=source
+
+Default value: ``true``
+
+##### <a name="source_base_dir"></a>`source_base_dir`
+
+Data type: `Stdlib::Absolutepath`
+
+Base directory of where Singularity source will be extracted
+Only used when install_method=source
+
+Default value: `'/opt'`
+
+##### <a name="build_flags"></a>`build_flags`
+
+Data type: `Hash`
+
+Build flags to pass to mconfig when building Singularity
+Only used when install_method=source
+
+Default value: `{}`
+
+##### <a name="build_env"></a>`build_env`
+
+Data type: `Hash`
+
+Environment variables to use when building from source
+Only used when install_method=source
+
+Default value: `{}`
+
+##### <a name="prefix"></a>`prefix`
+
+Data type: `Stdlib::Absolutepath`
+
+The --prefix value when building from source
+Only used when install_method=source
+
+Default value: `'/usr'`
+
+##### <a name="localstatedir"></a>`localstatedir`
+
+Data type: `Stdlib::Absolutepath`
+
+The --localstatedir value when building from source
+Only used when install_method=source
+
+Default value: `'/var'`
+
+##### <a name="sysconfdir"></a>`sysconfdir`
+
+Data type: `Stdlib::Absolutepath`
+
+The --sysconfdir value when building from source
+Only used when install_method=source
+
+Default value: `'/etc'`
+
+##### <a name="source_exec_path"></a>`source_exec_path`
+
+Data type: `String`
+
+Set PATH when building from source
+Only used when install_method=source
+
+Default value: `'/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin'`
+
+##### <a name="config_path"></a>`config_path`
 
 Data type: `Stdlib::Absolutepath`
 
 Path to singularity.conf
 
-Default value: `$singularity::params::config_path`
+Default value: `'/etc/singularity/singularity.conf'`
 
-##### `config_template`
+##### <a name="config_template"></a>`config_template`
 
 Data type: `String`
 
@@ -73,7 +232,7 @@ Template used for singularity.conf
 
 Default value: `'singularity/singularity.conf.erb'`
 
-##### `allow_setuid`
+##### <a name="allow_setuid"></a>`allow_setuid`
 
 Data type: `Enum['yes','no']`
 
@@ -81,7 +240,7 @@ See singularity.conf: `allow setuid`
 
 Default value: `'yes'`
 
-##### `max_loop_devices`
+##### <a name="max_loop_devices"></a>`max_loop_devices`
 
 Data type: `Integer`
 
@@ -89,7 +248,7 @@ See singularity.conf: `max loop devices`
 
 Default value: `256`
 
-##### `allow_pid_ns`
+##### <a name="allow_pid_ns"></a>`allow_pid_ns`
 
 Data type: `Enum['yes','no']`
 
@@ -97,7 +256,7 @@ See singularity.conf: `allow pid ns`
 
 Default value: `'yes'`
 
-##### `config_passwd`
+##### <a name="config_passwd"></a>`config_passwd`
 
 Data type: `Enum['yes','no']`
 
@@ -105,7 +264,7 @@ See singularity.conf: `config passwd`
 
 Default value: `'yes'`
 
-##### `config_group`
+##### <a name="config_group"></a>`config_group`
 
 Data type: `Enum['yes','no']`
 
@@ -113,7 +272,7 @@ See singularity.conf: `config group`
 
 Default value: `'yes'`
 
-##### `config_resolv_conf`
+##### <a name="config_resolv_conf"></a>`config_resolv_conf`
 
 Data type: `Enum['yes','no']`
 
@@ -121,7 +280,7 @@ See singularity.conf: `config resolv conf`
 
 Default value: `'yes'`
 
-##### `mount_proc`
+##### <a name="mount_proc"></a>`mount_proc`
 
 Data type: `Enum['yes','no']`
 
@@ -129,7 +288,7 @@ See singularity.conf: `mount proc`
 
 Default value: `'yes'`
 
-##### `mount_sys`
+##### <a name="mount_sys"></a>`mount_sys`
 
 Data type: `Enum['yes','no']`
 
@@ -137,7 +296,7 @@ See singularity.conf: `mount sys`
 
 Default value: `'yes'`
 
-##### `mount_dev`
+##### <a name="mount_dev"></a>`mount_dev`
 
 Data type: `Enum['yes','no']`
 
@@ -145,7 +304,7 @@ See singularity.conf: `mount dev`
 
 Default value: `'yes'`
 
-##### `mount_devpts`
+##### <a name="mount_devpts"></a>`mount_devpts`
 
 Data type: `Enum['yes','no']`
 
@@ -153,7 +312,7 @@ See singularity.conf: `mount devpts`
 
 Default value: `'yes'`
 
-##### `mount_home`
+##### <a name="mount_home"></a>`mount_home`
 
 Data type: `Enum['yes','no']`
 
@@ -161,7 +320,7 @@ See singularity.conf: `mount home`
 
 Default value: `'yes'`
 
-##### `mount_tmp`
+##### <a name="mount_tmp"></a>`mount_tmp`
 
 Data type: `Enum['yes','no']`
 
@@ -169,7 +328,7 @@ See singularity.conf: `mount tmp`
 
 Default value: `'yes'`
 
-##### `mount_hostfs`
+##### <a name="mount_hostfs"></a>`mount_hostfs`
 
 Data type: `Enum['yes','no']`
 
@@ -177,7 +336,7 @@ See singularity.conf: `mount hostfs`
 
 Default value: `'no'`
 
-##### `bind_paths`
+##### <a name="bind_paths"></a>`bind_paths`
 
 Data type: `Array[Stdlib::Absolutepath]`
 
@@ -185,7 +344,7 @@ See singularity.conf: `bind paths`
 
 Default value: `['/etc/localtime', '/etc/hosts']`
 
-##### `user_bind_control`
+##### <a name="user_bind_control"></a>`user_bind_control`
 
 Data type: `Enum['yes','no']`
 
@@ -193,7 +352,7 @@ See singularity.conf: `user bind control`
 
 Default value: `'yes'`
 
-##### `enable_fusemount`
+##### <a name="enable_fusemount"></a>`enable_fusemount`
 
 Data type: `Enum['yes','no']`
 
@@ -201,7 +360,7 @@ See singularity.conf: `enable fusemount`
 
 Default value: `'yes'`
 
-##### `enable_overlay`
+##### <a name="enable_overlay"></a>`enable_overlay`
 
 Data type: `Enum['yes','no','try']`
 
@@ -209,7 +368,7 @@ See singularity.conf: `enable overlay`
 
 Default value: `'try'`
 
-##### `enable_underlay`
+##### <a name="enable_underlay"></a>`enable_underlay`
 
 Data type: `Enum['yes','no','try','driver']`
 
@@ -217,7 +376,7 @@ See singularity.conf: `enable underlay`
 
 Default value: `'yes'`
 
-##### `mount_slave`
+##### <a name="mount_slave"></a>`mount_slave`
 
 Data type: `Enum['yes','no']`
 
@@ -225,7 +384,7 @@ See singularity.conf: `mount slave`
 
 Default value: `'yes'`
 
-##### `sessiondir_max_size`
+##### <a name="sessiondir_max_size"></a>`sessiondir_max_size`
 
 Data type: `Integer`
 
@@ -233,7 +392,7 @@ See singularity.conf: `sessiondir max size`
 
 Default value: `16`
 
-##### `limit_container_owners`
+##### <a name="limit_container_owners"></a>`limit_container_owners`
 
 Data type: `Optional[Array]`
 
@@ -241,7 +400,7 @@ See singularity.conf: `limit container owners`
 
 Default value: ``undef``
 
-##### `limit_container_groups`
+##### <a name="limit_container_groups"></a>`limit_container_groups`
 
 Data type: `Optional[Array]`
 
@@ -249,7 +408,7 @@ See singularity.conf: `limit container groups`
 
 Default value: ``undef``
 
-##### `limit_container_paths`
+##### <a name="limit_container_paths"></a>`limit_container_paths`
 
 Data type: `Optional[Array]`
 
@@ -257,7 +416,7 @@ See singularity.conf: `limit container paths`
 
 Default value: ``undef``
 
-##### `allow_containers`
+##### <a name="allow_containers"></a>`allow_containers`
 
 Data type: `Hash[String,Enum['yes','no']]`
 
@@ -270,7 +429,7 @@ Default value: `{
     'encrypted' => 'yes',
   }`
 
-##### `always_use_nv`
+##### <a name="always_use_nv"></a>`always_use_nv`
 
 Data type: `Enum['yes','no']`
 
@@ -278,7 +437,7 @@ See singularity.conf: `always use nv`
 
 Default value: `'no'`
 
-##### `always_use_rocm`
+##### <a name="always_use_rocm"></a>`always_use_rocm`
 
 Data type: `Enum['yes','no']`
 
@@ -286,7 +445,7 @@ See singularity.conf: `always use rocm`
 
 Default value: `'no'`
 
-##### `root_default_capabilities`
+##### <a name="root_default_capabilities"></a>`root_default_capabilities`
 
 Data type: `Enum['full','file','default','no']`
 
@@ -294,7 +453,7 @@ See singularity.conf: `root default capabilities`
 
 Default value: `'full'`
 
-##### `memory_fs_type`
+##### <a name="memory_fs_type"></a>`memory_fs_type`
 
 Data type: `Enum['tmpfs','ramfs']`
 
@@ -302,7 +461,7 @@ See singularity.conf: `memory fs type`
 
 Default value: `'tmpfs'`
 
-##### `cni_configuration_path`
+##### <a name="cni_configuration_path"></a>`cni_configuration_path`
 
 Data type: `Optional[Stdlib::Absolutepath]`
 
@@ -310,7 +469,7 @@ See singularity.conf: `cni configuration path`
 
 Default value: ``undef``
 
-##### `cni_plugin_path`
+##### <a name="cni_plugin_path"></a>`cni_plugin_path`
 
 Data type: `Optional[Stdlib::Absolutepath]`
 
@@ -318,7 +477,7 @@ See singularity.conf: `cni plugin path`
 
 Default value: ``undef``
 
-##### `mksquashfs_path`
+##### <a name="mksquashfs_path"></a>`mksquashfs_path`
 
 Data type: `Optional[Stdlib::Absolutepath]`
 
@@ -326,7 +485,7 @@ See singularity.conf: `mksquashfs path`
 
 Default value: ``undef``
 
-##### `mksquashfs_procs`
+##### <a name="mksquashfs_procs"></a>`mksquashfs_procs`
 
 Data type: `Integer[0,default]`
 
@@ -334,7 +493,7 @@ See singularity.conf: `mksquashfs procs`
 
 Default value: `0`
 
-##### `mksquashfs_mem`
+##### <a name="mksquashfs_mem"></a>`mksquashfs_mem`
 
 Data type: `Optional[String[1]]`
 
@@ -342,7 +501,7 @@ See singularity.conf: `mksquashfs mem`
 
 Default value: ``undef``
 
-##### `cryptsetup_path`
+##### <a name="cryptsetup_path"></a>`cryptsetup_path`
 
 Data type: `Optional[Stdlib::Absolutepath]`
 
@@ -350,7 +509,7 @@ See singularity.conf: `cryptsetup path`
 
 Default value: ``undef``
 
-##### `shared_loop_devices`
+##### <a name="shared_loop_devices"></a>`shared_loop_devices`
 
 Data type: `Enum['yes','no']`
 
@@ -358,7 +517,7 @@ See singularity.conf: `shared loop devices`
 
 Default value: `'no'`
 
-##### `image_driver`
+##### <a name="image_driver"></a>`image_driver`
 
 Data type: `Optional[String]`
 
@@ -366,7 +525,7 @@ See singularity.conf: `image driver`
 
 Default value: ``undef``
 
-##### `namespace_users`
+##### <a name="namespace_users"></a>`namespace_users`
 
 Data type: `Array`
 
@@ -374,7 +533,7 @@ List of uses to add to /etc/subuid and /etc/subgid to support user namespaces
 
 Default value: `[]`
 
-##### `namespace_begin_id`
+##### <a name="namespace_begin_id"></a>`namespace_begin_id`
 
 Data type: `Integer`
 
@@ -383,7 +542,7 @@ For each user by start + namespace_id_range + 1
 
 Default value: `65537`
 
-##### `namespace_id_range`
+##### <a name="namespace_id_range"></a>`namespace_id_range`
 
 Data type: `Integer`
 
@@ -391,7 +550,7 @@ The range of UIDs/GIDs usable by a user in namespaces
 
 Default value: `65536`
 
-##### `subid_template`
+##### <a name="subid_template"></a>`subid_template`
 
 Data type: `String`
 
