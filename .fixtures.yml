@@ -4,9 +4,17 @@ fixtures:
       repo: https://github.com/puppetlabs/puppetlabs-stdlib.git
       ref: 4.13.1
     epel:
-      repo: https://github.com/stahnma/puppet-module-epel.git
+      repo: https://github.com/voxpupuli/puppet-epel.git
+      ref: v3.0.0
     yumrepo_core:
       repo: https://github.com/puppetlabs/puppetlabs-yumrepo_core.git
       puppet_version: ">= 6.0.0"
+    golang:
+      repo: https://github.com/treydock/puppet-module-golang.git
+      ref: v1.0.0
+    # Needed for golang
+    archive:
+      repo: https://github.com/voxpupuli/puppet-archive.git
+      ref: v1.0.0
   symlinks:
     singularity: "#{source_dir}"

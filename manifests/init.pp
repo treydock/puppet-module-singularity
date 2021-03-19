@@ -3,12 +3,47 @@
 # @example
 #   include ::singularity
 #
+# @param install_method
+#   Sets how Singularity will be installed
 # @param package_ensure
 #   Package ensure property
+#   Only used when install_method=package
 # @param package_name
 #   Singularity package name
+#   Only used when install_method=package
 # @param manage_epel
 #   Determines if EPEL repo should be managed
+#   Only used when install_method=package on RedHat based systems
+# @param version
+#   Version of Singularity to install
+#   Only used when install_method=source
+# @param source_dependencies
+#   Packages needed to build from source
+#   Only used when install_method=source
+# @param manage_go
+#   Sets if golang module should be included
+#   Only used when install_method=source
+# @param source_base_dir
+#   Base directory of where Singularity source will be extracted
+#   Only used when install_method=source
+# @param build_flags
+#   Build flags to pass to mconfig when building Singularity
+#   Only used when install_method=source
+# @param build_env
+#   Environment variables to use when building from source
+#   Only used when install_method=source
+# @param prefix
+#   The --prefix value when building from source
+#   Only used when install_method=source
+# @param localstatedir
+#   The --localstatedir value when building from source
+#   Only used when install_method=source
+# @param sysconfdir
+#   The --sysconfdir value when building from source
+#   Only used when install_method=source
+# @param source_exec_path
+#   Set PATH when building from source
+#   Only used when install_method=source
 # @param config_path
 #   Path to singularity.conf
 # @param config_template
@@ -96,10 +131,24 @@
 #   The template to use for /etc/subuid and /etc/subgid
 #
 class singularity (
+  Enum['package','source'] $install_method = 'package',
+  # Package install
   String $package_ensure = 'present',
-  String $package_name = $singularity::params::package_name,
+  String $package_name = 'singularity',
   Boolean $manage_epel = true,
-  Stdlib::Absolutepath $config_path = $singularity::params::config_path,
+  # Source install
+  String $version = '3.7.1',
+  Array $source_dependencies = [],
+  Boolean $manage_go = true,
+  Stdlib::Absolutepath $source_base_dir = '/opt',
+  Hash $build_flags = {},
+  Hash $build_env = {},
+  Stdlib::Absolutepath $prefix = '/usr',
+  Stdlib::Absolutepath $localstatedir = '/var',
+  Stdlib::Absolutepath $sysconfdir = '/etc',
+  String $source_exec_path = '/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin',
+  # Config
+  Stdlib::Absolutepath $config_path = '/etc/singularity/singularity.conf',
   String $config_template = 'singularity/singularity.conf.erb',
   Enum['yes','no'] $allow_setuid  = 'yes',
   Integer $max_loop_devices = 256,
@@ -148,14 +197,10 @@ class singularity (
   String $subid_template = 'singularity/subid.erb',
 ) {
 
-  if ! $facts['os']['family'] in ['RedHat'] {
-    fail("Unsupported osfamily: ${facts['os']['family']}, module ${module_name} only support osfamily RedHat")
-  }
-
-  contain singularity::install
+  contain "singularity::install::${install_method}"
   contain singularity::config
 
-  Class['singularity::install']
+  Class["singularity::install::${install_method}"]
   ->Class['singularity::config']
 
 }

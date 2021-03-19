@@ -1,2 +1,2 @@
 ---
-
+singularity::config_path: /etc/singularity/singularity.conf
