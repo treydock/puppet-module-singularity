@@ -6,7 +6,7 @@
 <title>
   File: README
   
-    &mdash; Documentation by YARD 0.9.25
+    &mdash; Documentation by YARD 0.9.26
   
 </title>
 
@@ -62,86 +62,55 @@
 
 <p><a href="https://forge.puppetlabs.com/treydock/singularity"><img
 src="http://img.shields.io/puppetforge/v/treydock/singularity.svg"></a> <a
-href="https://travis-ci.org/treydock/puppet-module-singularity"><img
-src="https://travis-ci.org/treydock/puppet-module-singularity.png"></a></p>
+href="https://github.com/treydock/puppet-module-singularity/actions?query=workflow%3ACI"><img
+src="https://github.com/treydock/puppet-module-singularity/workflows/CI/badge.svg?branch=master"></a></p>
 
 <h4 id="label-Table+of+Contents">Table of Contents</h4>
 <ol><li>
-<p><a href="#label-Overview">Overview</a></p>
+<p><a href="#overview">Overview</a></p>
 </li><li>
-<p><a href="#label-Usage">Usage - Configuration options</a></p>
+<p><a href="#usage">Usage - Configuration options</a></p>
 </li><li>
-<p><a href="#label-Reference">Reference - Parameter and detailed reference to all
+<p><a href="#reference">Reference - Parameter and detailed reference to all
 options</a></p>
-</li><li>
-<p><a href="#label-Limitations">Limitations - OS compatibility, etc.</a></p>
-</li><li>
-<p><a href="#label-Development">Development - Guide for contributing to the
-module</a></p>
-</li><li>
-<p><a href="#label-Todo">TODO</a></p>
-</li><li>
-<p><a href="#label-Additional+information">Additional Information</a></p>
 </li></ol>
 
 <h2 id="label-Overview">Overview</h2>
 
-<p>This module manages the singularity package installation and configuration
-of singularity.conf.</p>
+<p>This module manages the singularity installation and configuration of
+singularity.conf.</p>
 
-<p><strong>NOTE:</strong> The <code>puppetlabs/yumrepo_core</code> Puppet
-module is a soft dependency if using Puppet &gt;= 6.0.0.</p>
+<p>RedHat based systems will by default install from EPEL package</p>
+
+<p>Debian based systems will by default install from source</p>
 
 <h2 id="label-Usage">Usage</h2>
 
 <h3 id="label-singularity">singularity</h3>
 
-<p>Install and configure singularity:</p>
+<p>Install and configure singularity.</p>
 
-<pre class="code ruby"><code class="ruby">class { &#39;singularity&#39;: }
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_include'>include</span> <span class='id identifier rubyid_singularity'>singularity</span>
+</code></pre>
+
+<p>The following Hiera example of building from source (default for Debian
+based systems) with several additional options passed.</p>
+
+<pre class="code ruby"><code class="ruby">singularity::install_method: source
+singularity::build_flags:
+  without-suid: true
+  mandir: /some/other/path
+singularity::build_env:
+  GOPATH=/some/other/path
+singularity::prefix: /opt/singularity
+singularity::sysconfdir: /opt/singularity/etc
+singularity::localstatedir: /opt/singularity/var
 </code></pre>
 
 <h2 id="label-Reference">Reference</h2>
 
 <p><a
 href="http://treydock.github.io/puppet-module-singularity/">treydock.github.io/puppet-module-singularity/</a></p>
-
-<h2 id="label-Limitations">Limitations</h2>
-
-<p>This module has been tested on:</p>
-<ul><li>
-<p>RedHat/CentOS 6 x86_64</p>
-</li><li>
-<p>RedHat/CentOS 7 x86_64</p>
-</li><li>
-<p>RedHat/CentOS 8 x86_64</p>
-</li></ul>
-
-<h2 id="label-Development">Development</h2>
-
-<h3 id="label-Testing">Testing</h3>
-
-<p>Testing requires the following dependencies:</p>
-<ul><li>
-<p>rake</p>
-</li><li>
-<p>bundler</p>
-</li></ul>
-
-<p>Install gem dependencies</p>
-
-<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_bundle'>bundle</span> <span class='id identifier rubyid_install'>install</span>
-</code></pre>
-
-<p>Run unit tests</p>
-
-<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_bundle'>bundle</span> <span class='id identifier rubyid_exec'>exec</span> <span class='id identifier rubyid_rake'>rake</span> <span class='id identifier rubyid_spec'>spec</span>
-</code></pre>
-
-<p>If you have Vagrant &gt;= 1.2.0 installed you can run system tests</p>
-
-<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_bundle'>bundle</span> <span class='id identifier rubyid_exec'>exec</span> <span class='id identifier rubyid_rake'>rake</span> <span class='id identifier rubyid_beaker'>beaker</span>
-</code></pre>
 </div></div>
 
       <div id="footer">
