@@ -10,7 +10,7 @@
   "dependencies": [
     {
       "name": "puppetlabs/stdlib",
-      "version_requirement": ">= 4.13.1 <7.0.0"
+      "version_requirement": ">= 4.13.1 <8.0.0"
     },
     {
       "name": "puppetlabs/yumrepo_core",
@@ -22,7 +22,7 @@
     },
     {
       "name": "treydock/golang",
-      "version_requirement": ">= 1.0.0 <2.0.0"
+      "version_requirement": ">= 1.0.0 <3.0.0"
     }
   ],
   "operatingsystem_support": [
@@ -63,5 +63,5 @@
   ],
   "pdk-version": "1.17.0",
   "template-url": "https://github.com/treydock/pdk-templates.git#master",
-  "template-ref": "heads/master-0-g1d2967a"
+  "template-ref": "heads/master-0-g3ae711a"
 }
