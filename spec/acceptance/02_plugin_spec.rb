@@ -25,12 +25,9 @@ describe 'singularity::plugin' do
       apply_manifest(setup_pp, catch_failures: true)
       apply_manifest(pp, catch_failures: true)
       apply_manifest(pp, catch_changes: true)
-      on hosts, 'find /var/log -type f -exec rm -f {} \;'
-      on hosts, 'systemctl restart rsyslog'
-      sleep 5
     end
 
-    describe command('singularity pull /tmp/lolcow.sif library://lolcow ; singularity run /tmp/lolcow.sif') do
+    describe command('singularity pull /tmp/lolcow.sif library://lolcow ; singularity run /tmp/lolcow.sif ; sleep 5') do
       its(:exit_status) { is_expected.to eq(0) }
     end
 
@@ -66,7 +63,7 @@ describe 'singularity::plugin' do
       apply_manifest(pp, catch_changes: true)
     end
 
-    describe command('singularity pull /tmp/lolcow.sif library://lolcow ; singularity run /tmp/lolcow.sif') do
+    describe command('singularity pull /tmp/lolcow.sif library://lolcow ; singularity run /tmp/lolcow.sif ; sleep 5') do
       its(:exit_status) { is_expected.to eq(0) }
     end
 
