@@ -22,6 +22,7 @@ describe 'singularity::plugin' do
       EOS
 
       apply_manifest(setup_pp, catch_failures: true)
+      apply_manifest(setup_pp, catch_failures: true)
       apply_manifest(pp, catch_failures: true)
       apply_manifest(pp, catch_changes: true)
     end
