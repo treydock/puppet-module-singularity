@@ -1,3 +1,9 @@
 ---
 singularity::install_method: package
 singularity::package_name: singularity
+singularity::source_dependencies:
+  - gcc
+  - make
+  - squashfs-tools
+  - libseccomp-devel
+  - cryptsetup

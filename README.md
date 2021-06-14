@@ -41,6 +41,14 @@ singularity::sysconfdir: /opt/singularity/etc
 singularity::localstatedir: /opt/singularity/var
 ```
 
+Compile and install a Singularity plugin from the Singularity source:
+
+```yaml
+singularity::plugins:
+  github.com/sylabs/singularity/log-plugin:
+    source_dir: examples/plugins/log-plugin
+```
+
 ## Reference
 
 [http://treydock.github.io/puppet-module-singularity/](http://treydock.github.io/puppet-module-singularity/)

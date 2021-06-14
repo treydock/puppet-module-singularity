@@ -44,6 +44,8 @@
 # @param source_exec_path
 #   Set PATH when building from source
 #   Only used when install_method=source
+# @param plugins
+#   Hash to define singularity::plugin resources
 # @param config_path
 #   Path to singularity.conf
 # @param config_template
@@ -147,6 +149,7 @@ class singularity (
   Stdlib::Absolutepath $localstatedir = '/var',
   Stdlib::Absolutepath $sysconfdir = '/etc',
   String $source_exec_path = '/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin',
+  Hash $plugins = {},
   # Config
   Stdlib::Absolutepath $config_path = '/etc/singularity/singularity.conf',
   String $config_template = 'singularity/singularity.conf.erb',
@@ -203,4 +206,7 @@ class singularity (
   Class["singularity::install::${install_method}"]
   ->Class['singularity::config']
 
+  $plugins.each |$name, $plugin| {
+    singularity::plugin { $name: * => $plugin }
+  }
 }
