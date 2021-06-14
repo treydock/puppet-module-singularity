@@ -27,7 +27,7 @@ describe 'singularity::plugin' do
       apply_manifest(pp, catch_changes: true)
     end
 
-    describe command('singularity pull /tmp/lolcow.sif library://lolcow ; singularity run /tmp/lolcow.sif') do
+    describe command('singularity pull /tmp/lolcow.sif library://lolcow ; singularity run /tmp/lolcow.sif ; sleep 5') do
       its(:exit_status) { is_expected.to eq(0) }
     end
 
@@ -63,7 +63,7 @@ describe 'singularity::plugin' do
       apply_manifest(pp, catch_changes: true)
     end
 
-    describe command('singularity pull /tmp/lolcow.sif library://lolcow ; singularity run /tmp/lolcow.sif') do
+    describe command('singularity pull /tmp/lolcow.sif library://lolcow ; singularity run /tmp/lolcow.sif ; sleep 5') do
       its(:exit_status) { is_expected.to eq(0) }
     end
 

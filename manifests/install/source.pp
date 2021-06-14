@@ -27,6 +27,22 @@ class singularity::install::source {
     'HOME' => '/root',
   }
   $build_env = ($base_build_env + $singularity::build_env).map |$key, $value| { "${key}=${value}" }
+
+  file { 'singularity-mconfig':
+      ensure  => 'file',
+      path    => $singularity::source_mconfig_path,
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0755',
+      content => join([
+        '#!/bin/bash',
+        '# File managed by Puppet, do not edit',
+        "cd ${source_dir}",
+        "./mconfig ${build_flags}",
+        '',
+      ], "\n")
+    }
+
   file { $source_dir:
     ensure => 'directory',
     owner  => 'root',
@@ -42,26 +58,15 @@ class singularity::install::source {
       cleanup         => true,
       user            => 'root',
       group           => 'root',
+      before          => Exec['singularity-mconfig'],
     }
-  -> file { 'singularity-mconfig':
-    ensure  => 'file',
-    path    => "${source_dir}/mconfig.sh",
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0755',
-    content => join([
-      '#!/bin/bash',
-      '# File managed by Puppet, do not edit',
-      "./mconfig ${build_flags}",
-      '',
-    ], "\n")
-  }
-  ~> exec { 'singularity-mconfig':
+  exec { 'singularity-mconfig':
     path        => $singularity::source_exec_path,
     environment => $build_env,
-    command     => "${source_dir}/mconfig.sh",
+    command     => $singularity::source_mconfig_path,
     cwd         => $source_dir,
     refreshonly => true,
+    subscribe   => File['singularity-mconfig'],
   }
   ~> exec { 'singularity-make':
     path        => $singularity::source_exec_path,
