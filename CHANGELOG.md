@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
+## [v5.1.0](https://github.com/treydock/puppet-module-singularity/tree/v5.1.0) (2021-06-14)
+
+[Full Changelog](https://github.com/treydock/puppet-module-singularity/compare/v5.0.0...v5.1.0)
+
+### Added
+
+- Improve source install method to support better upgrade/downgrade [\#26](https://github.com/treydock/puppet-module-singularity/pull/26) ([treydock](https://github.com/treydock))
+- Support Singularity plugin compile and install [\#25](https://github.com/treydock/puppet-module-singularity/pull/25) ([treydock](https://github.com/treydock))
+- Update module dependency ranges [\#24](https://github.com/treydock/puppet-module-singularity/pull/24) ([treydock](https://github.com/treydock))
+
 ## [v5.0.0](https://github.com/treydock/puppet-module-singularity/tree/v5.0.0) (2021-03-19)
 
 [Full Changelog](https://github.com/treydock/puppet-module-singularity/compare/v4.0.0...v5.0.0)

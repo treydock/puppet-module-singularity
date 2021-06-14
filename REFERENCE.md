@@ -16,6 +16,10 @@
 * `singularity::install::package`: Private class
 * `singularity::install::source`: Private class
 
+### Defined types
+
+* [`singularity::plugin`](#singularityplugin): Manage Singularity plugin
+
 ## Classes
 
 ### <a name="singularity"></a>`singularity`
@@ -42,12 +46,14 @@ The following parameters are available in the `singularity` class:
 * [`source_dependencies`](#source_dependencies)
 * [`manage_go`](#manage_go)
 * [`source_base_dir`](#source_base_dir)
+* [`source_mconfig_path`](#source_mconfig_path)
 * [`build_flags`](#build_flags)
 * [`build_env`](#build_env)
 * [`prefix`](#prefix)
 * [`localstatedir`](#localstatedir)
 * [`sysconfdir`](#sysconfdir)
 * [`source_exec_path`](#source_exec_path)
+* [`plugins`](#plugins)
 * [`config_path`](#config_path)
 * [`config_template`](#config_template)
 * [`allow_setuid`](#allow_setuid)
@@ -162,6 +168,14 @@ Only used when install_method=source
 
 Default value: `'/opt'`
 
+##### <a name="source_mconfig_path"></a>`source_mconfig_path`
+
+Data type: `Stdlib::Absolutepath`
+
+Path to source install mconfig script
+
+Default value: `'/usr/local/sbin/singularity-mconfig.sh'`
+
 ##### <a name="build_flags"></a>`build_flags`
 
 Data type: `Hash`
@@ -215,6 +229,14 @@ Set PATH when building from source
 Only used when install_method=source
 
 Default value: `'/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin'`
+
+##### <a name="plugins"></a>`plugins`
+
+Data type: `Hash`
+
+Hash to define singularity::plugin resources
+
+Default value: `{}`
 
 ##### <a name="config_path"></a>`config_path`
 
@@ -557,4 +579,56 @@ Data type: `String`
 The template to use for /etc/subuid and /etc/subgid
 
 Default value: `'singularity/subid.erb'`
+
+## Defined types
+
+### <a name="singularityplugin"></a>`singularity::plugin`
+
+Manage Singularity plugin
+
+#### Examples
+
+##### install log plugin
+
+```puppet
+
+singularity::plugin { 'github.com/sylabs/singularity/log-plugin':
+  source_dir => 'examples/plugins/log-plugin',
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `singularity::plugin` defined type:
+
+* [`source_dir`](#source_dir)
+* [`ensure`](#ensure)
+* [`sif_name`](#sif_name)
+
+##### <a name="source_dir"></a>`source_dir`
+
+Data type: `Optional[String]`
+
+The plugin source directory
+This path must be relative to Singularity source directory `$singularity::install::source::source_dir`
+
+Default value: ``undef``
+
+##### <a name="ensure"></a>`ensure`
+
+Data type: `Enum['present', 'absent']`
+
+Whether to install (present) or uninstall (absent) the plugin
+
+Default value: `'present'`
+
+##### <a name="sif_name"></a>`sif_name`
+
+Data type: `Optional[String]`
+
+The name of the SIF image to use for install after the plugin is compiled.
+The default is to use part after last `/` in the plugin name so
+plugin `examples/plugins/log-plugin` will have SIF name of `log-plugin.sif`.
+
+Default value: ``undef``
 
