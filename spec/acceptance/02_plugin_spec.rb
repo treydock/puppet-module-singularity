@@ -25,6 +25,9 @@ describe 'singularity::plugin' do
       apply_manifest(setup_pp, catch_failures: true)
       apply_manifest(pp, catch_failures: true)
       apply_manifest(pp, catch_changes: true)
+      on hosts, 'find /var/log -type f -exec rm -f {} \;'
+      on hosts, 'systemctl restart rsyslog'
+      sleep 5
     end
 
     describe command('singularity pull /tmp/lolcow.sif library://lolcow ; singularity run /tmp/lolcow.sif') do

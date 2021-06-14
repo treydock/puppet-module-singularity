@@ -26,6 +26,8 @@
 # @param source_base_dir
 #   Base directory of where Singularity source will be extracted
 #   Only used when install_method=source
+# @param source_mconfig_path
+#   Path to source install mconfig script
 # @param build_flags
 #   Build flags to pass to mconfig when building Singularity
 #   Only used when install_method=source
@@ -143,6 +145,7 @@ class singularity (
   Array $source_dependencies = [],
   Boolean $manage_go = true,
   Stdlib::Absolutepath $source_base_dir = '/opt',
+  Stdlib::Absolutepath $source_mconfig_path = '/usr/local/sbin/singularity-mconfig.sh',
   Hash $build_flags = {},
   Hash $build_env = {},
   Stdlib::Absolutepath $prefix = '/usr',
