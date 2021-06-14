@@ -21,7 +21,8 @@ describe 'singularity::plugin' do
         is_expected.to contain_exec('singularity-plugin-compile-github.com/sylabs/singularity/log-plugin').with(
           path: '/usr/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin',
           environment: ['HOME=/root'],
-          command: 'singularity plugin compile /opt/singularity-3.7.1/examples/plugins/log-plugin',
+          command: 'singularity plugin compile examples/plugins/log-plugin',
+          cwd: '/opt/singularity-3.7.1',
           creates: '/opt/singularity-3.7.1/examples/plugins/log-plugin/log-plugin.sif',
           require: 'Class[Singularity::Install::Source]',
         )
@@ -31,7 +32,8 @@ describe 'singularity::plugin' do
         is_expected.to contain_exec('singularity-plugin-recompile-github.com/sylabs/singularity/log-plugin').with(
           path: '/usr/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin',
           environment: ['HOME=/root'],
-          command: 'singularity plugin compile /opt/singularity-3.7.1/examples/plugins/log-plugin',
+          command: 'singularity plugin compile examples/plugins/log-plugin',
+          cwd: '/opt/singularity-3.7.1',
           onlyif: 'test -f /opt/singularity-3.7.1/examples/plugins/log-plugin/log-plugin.sif',
           refreshonly: 'true',
           require: 'Class[Singularity::Install::Source]',
@@ -68,16 +70,6 @@ describe 'singularity::plugin' do
             'Exec[singularity-plugin-reinstall-github.com/sylabs/singularity/log-plugin]',
           ],
         )
-      end
-
-      context 'when source_dir is absolute path' do
-        let(:params) { { source_dir: '/foobar' } }
-
-        it do
-          is_expected.to contain_exec('singularity-plugin-compile-github.com/sylabs/singularity/log-plugin').with(
-            command: 'singularity plugin compile /foobar',
-          )
-        end
       end
 
       context 'when ensure => absent' do

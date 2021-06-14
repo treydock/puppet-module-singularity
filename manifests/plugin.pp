@@ -8,13 +8,13 @@
 #
 # @param source_dir
 #   The plugin source directory
-#   If the path is relative, assumes relative to singularity source directory
+#   This path must be relative to Singularity source directory `$singularity::install::source::source_dir`
 # @param ensure
 #   Whether to install (present) or uninstall (absent) the plugin
 # @param sif_name
 #   The name of the SIF image to use for install after the plugin is compiled.
 #   The default is to use part after last `/` in the plugin name so
-#   plugin `examples/plugins/log-plugin` will have SIF name of `log-plugin`.
+#   plugin `examples/plugins/log-plugin` will have SIF name of `log-plugin.sif`.
 #
 define singularity::plugin (
   Enum['present', 'absent'] $ensure = 'present',
@@ -36,18 +36,13 @@ define singularity::plugin (
   if $ensure == 'present' {
     $basename = split($name, '/')[-1]
     $_sif_name = pick($sif_name, "${basename}.sif")
-    if $source_dir =~ Stdlib::Absolutepath {
-      $_source_dir = $source_dir
-    } else {
-      include singularity::install::source
-      $_source_dir = "${singularity::install::source::source_dir}/${source_dir}"
-    }
-    $sif_path = "${_source_dir}/${_sif_name}"
+    $sif_path = "${singularity::install::source::source_dir}/${source_dir}/${_sif_name}"
 
     exec { "singularity-plugin-compile-${name}":
       path        => $exec_path,
       environment => $singularity::install::source::build_env,
-      command     => "singularity plugin compile ${_source_dir}",
+      command     => "singularity plugin compile ${source_dir}",
+      cwd         => $singularity::install::source::source_dir,
       creates     => $sif_path,
       require     => Class['singularity::install::source'],
     }
@@ -55,7 +50,8 @@ define singularity::plugin (
     exec { "singularity-plugin-recompile-${name}":
       path        => $exec_path,
       environment => $singularity::install::source::build_env,
-      command     => "singularity plugin compile ${_source_dir}",
+      command     => "singularity plugin compile ${source_dir}",
+      cwd         => $singularity::install::source::source_dir,
       onlyif      => "test -f ${sif_path}",
       refreshonly => true,
       require     => Class['singularity::install::source'],
