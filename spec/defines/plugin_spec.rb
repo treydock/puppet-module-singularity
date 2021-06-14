@@ -28,6 +28,18 @@ describe 'singularity::plugin' do
       end
 
       it do
+        is_expected.to contain_exec('singularity-plugin-recompile-github.com/sylabs/singularity/log-plugin').with(
+          path: '/usr/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin',
+          environment: ['HOME=/root'],
+          command: 'singularity plugin compile /opt/singularity-3.7.1/examples/plugins/log-plugin',
+          onlyif: 'test -f /opt/singularity-3.7.1/examples/plugins/log-plugin/log-plugin.sif',
+          refreshonly: 'true',
+          require: 'Class[Singularity::Install::Source]',
+          notify: 'Exec[singularity-plugin-reinstall-github.com/sylabs/singularity/log-plugin]',
+        )
+      end
+
+      it do
         is_expected.to contain_exec('singularity-plugin-install-github.com/sylabs/singularity/log-plugin').with(
           path: '/usr/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin',
           command: 'singularity plugin install /opt/singularity-3.7.1/examples/plugins/log-plugin/log-plugin.sif',
@@ -37,11 +49,24 @@ describe 'singularity::plugin' do
       end
 
       it do
+        is_expected.to contain_exec('singularity-plugin-reinstall-github.com/sylabs/singularity/log-plugin').with(
+          path: '/usr/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin',
+          command: 'singularity plugin install /opt/singularity-3.7.1/examples/plugins/log-plugin/log-plugin.sif',
+          onlyif: "singularity plugin list | grep 'github.com/sylabs/singularity/log-plugin'",
+          refreshonly: 'true',
+          subscribe: 'Exec[singularity-plugin-compile-github.com/sylabs/singularity/log-plugin]',
+        )
+      end
+
+      it do
         is_expected.to contain_exec('singularity-plugin-enable-github.com/sylabs/singularity/log-plugin').with(
           path: '/usr/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin',
           command: 'singularity plugin enable github.com/sylabs/singularity/log-plugin',
           unless: "singularity plugin list | grep 'github.com/sylabs/singularity/log-plugin' | grep yes",
-          require: 'Exec[singularity-plugin-install-github.com/sylabs/singularity/log-plugin]',
+          require: [
+            'Exec[singularity-plugin-install-github.com/sylabs/singularity/log-plugin]',
+            'Exec[singularity-plugin-reinstall-github.com/sylabs/singularity/log-plugin]',
+          ],
         )
       end
 

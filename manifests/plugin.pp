@@ -52,6 +52,16 @@ define singularity::plugin (
       require     => Class['singularity::install::source'],
     }
 
+    exec { "singularity-plugin-recompile-${name}":
+      path        => $exec_path,
+      environment => $singularity::install::source::build_env,
+      command     => "singularity plugin compile ${_source_dir}",
+      onlyif      => "test -f ${sif_path}",
+      refreshonly => true,
+      require     => Class['singularity::install::source'],
+      notify      => Exec["singularity-plugin-reinstall-${name}"],
+    }
+
     exec { "singularity-plugin-install-${name}":
       path    => $exec_path,
       command => "singularity plugin install ${sif_path}",
@@ -59,11 +69,22 @@ define singularity::plugin (
       require => Exec["singularity-plugin-compile-${name}"],
     }
 
+    exec { "singularity-plugin-reinstall-${name}":
+      path        => $exec_path,
+      command     => "singularity plugin install ${sif_path}",
+      onlyif      => "singularity plugin list | grep '${name}'",
+      refreshonly => true,
+      subscribe   => Exec["singularity-plugin-compile-${name}"],
+    }
+
     exec { "singularity-plugin-enable-${name}":
       path    => $exec_path,
       command => "singularity plugin enable ${name}",
       unless  => "singularity plugin list | grep '${name}' | grep yes",
-      require => Exec["singularity-plugin-install-${name}"],
+      require => [
+        Exec["singularity-plugin-install-${name}"],
+        Exec["singularity-plugin-reinstall-${name}"],
+      ],
     }
   } else {
     exec { "singularity-plugin-uninstall-${name}":
