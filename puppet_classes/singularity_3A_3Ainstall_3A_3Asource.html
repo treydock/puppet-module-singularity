@@ -170,7 +170,12 @@
 77
 78
 79
-80</pre>
+80
+81
+82
+83
+84
+85</pre>
       </td>
       <td>
         <pre class="code"><span class="info file"># File 'manifests/install/source.pp', line 3</span>
@@ -202,6 +207,22 @@ class singularity::install::source {
     &#39;HOME&#39; =&gt; &#39;/root&#39;,
   }
   $build_env = ($base_build_env + $singularity::build_env).map |$key, $value| { &quot;${key}=${value}&quot; }
+
+  file { &#39;singularity-mconfig&#39;:
+      ensure  =&gt; &#39;file&#39;,
+      path    =&gt; $singularity::source_mconfig_path,
+      owner   =&gt; &#39;root&#39;,
+      group   =&gt; &#39;root&#39;,
+      mode    =&gt; &#39;0755&#39;,
+      content =&gt; join([
+        &#39;#!/bin/bash&#39;,
+        &#39;# File managed by Puppet, do not edit&#39;,
+        &quot;cd ${source_dir}&quot;,
+        &quot;./mconfig ${build_flags}&quot;,
+        &#39;&#39;,
+      ], &quot;\n&quot;)
+    }
+
   file { $source_dir:
     ensure =&gt; &#39;directory&#39;,
     owner  =&gt; &#39;root&#39;,
@@ -217,26 +238,15 @@ class singularity::install::source {
       cleanup         =&gt; true,
       user            =&gt; &#39;root&#39;,
       group           =&gt; &#39;root&#39;,
+      before          =&gt; Exec[&#39;singularity-mconfig&#39;],
     }
-  -&gt; file { &#39;singularity-mconfig&#39;:
-    ensure  =&gt; &#39;file&#39;,
-    path    =&gt; &quot;${source_dir}/mconfig.sh&quot;,
-    owner   =&gt; &#39;root&#39;,
-    group   =&gt; &#39;root&#39;,
-    mode    =&gt; &#39;0755&#39;,
-    content =&gt; join([
-      &#39;#!/bin/bash&#39;,
-      &#39;# File managed by Puppet, do not edit&#39;,
-      &quot;./mconfig ${build_flags}&quot;,
-      &#39;&#39;,
-    ], &quot;\n&quot;)
-  }
-  ~&gt; exec { &#39;singularity-mconfig&#39;:
+  exec { &#39;singularity-mconfig&#39;:
     path        =&gt; $singularity::source_exec_path,
     environment =&gt; $build_env,
-    command     =&gt; &quot;${source_dir}/mconfig.sh&quot;,
+    command     =&gt; $singularity::source_mconfig_path,
     cwd         =&gt; $source_dir,
     refreshonly =&gt; true,
+    subscribe   =&gt; File[&#39;singularity-mconfig&#39;],
   }
   ~&gt; exec { &#39;singularity-make&#39;:
     path        =&gt; $singularity::source_exec_path,

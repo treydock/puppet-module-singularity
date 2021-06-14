@@ -243,6 +243,24 @@ install_method=source</p>
   
     <li>
       
+        <span class='name'>source_mconfig_path</span>
+      
+      
+        <span class='type'>(<tt>Stdlib::Absolutepath</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;/usr/local/sbin/singularity-mconfig.sh&#39;</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Path to source install mconfig script</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
         <span class='name'>build_flags</span>
       
       
@@ -350,6 +368,24 @@ install_method=source</p>
         &mdash;
         <div class='inline'>
 <p>Set PATH when building from source Only used when install_method=source</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>plugins</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Hash to define singularity::plugin resources</p>
 </div>
       
     </li>
@@ -1128,10 +1164,6 @@ For each user by start + namespace_id_range + 1</p>
         <pre class="lines">
 
 
-133
-134
-135
-136
 137
 138
 139
@@ -1201,10 +1233,19 @@ For each user by start + namespace_id_range + 1</p>
 203
 204
 205
-206</pre>
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215</pre>
       </td>
       <td>
-        <pre class="code"><span class="info file"># File 'manifests/init.pp', line 133</span>
+        <pre class="code"><span class="info file"># File 'manifests/init.pp', line 137</span>
 
 class singularity (
   Enum[&#39;package&#39;,&#39;source&#39;] $install_method = &#39;package&#39;,
@@ -1217,12 +1258,14 @@ class singularity (
   Array $source_dependencies = [],
   Boolean $manage_go = true,
   Stdlib::Absolutepath $source_base_dir = &#39;/opt&#39;,
+  Stdlib::Absolutepath $source_mconfig_path = &#39;/usr/local/sbin/singularity-mconfig.sh&#39;,
   Hash $build_flags = {},
   Hash $build_env = {},
   Stdlib::Absolutepath $prefix = &#39;/usr&#39;,
   Stdlib::Absolutepath $localstatedir = &#39;/var&#39;,
   Stdlib::Absolutepath $sysconfdir = &#39;/etc&#39;,
   String $source_exec_path = &#39;/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin&#39;,
+  Hash $plugins = {},
   # Config
   Stdlib::Absolutepath $config_path = &#39;/etc/singularity/singularity.conf&#39;,
   String $config_template = &#39;singularity/singularity.conf.erb&#39;,
@@ -1279,6 +1322,9 @@ class singularity (
   Class[&quot;singularity::install::${install_method}&quot;]
   -&gt;Class[&#39;singularity::config&#39;]
 
+  $plugins.each |$name, $plugin| {
+    singularity::plugin { $name: * =&gt; $plugin }
+  }
 }</pre>
       </td>
     </tr>
