@@ -80,6 +80,9 @@ The following parameters are available in the `singularity` class:
 * [`limit_container_groups`](#limit_container_groups)
 * [`limit_container_paths`](#limit_container_paths)
 * [`allow_containers`](#allow_containers)
+* [`allow_net_users`](#allow_net_users)
+* [`allow_net_groups`](#allow_net_groups)
+* [`allow_net_networks`](#allow_net_networks)
 * [`always_use_nv`](#always_use_nv)
 * [`always_use_rocm`](#always_use_rocm)
 * [`root_default_capabilities`](#root_default_capabilities)
@@ -139,7 +142,7 @@ Data type: `String`
 Version of Singularity to install
 Only used when install_method=source
 
-Default value: `'3.7.1'`
+Default value: `'3.7.4'`
 
 ##### <a name="source_dependencies"></a>`source_dependencies`
 
@@ -450,6 +453,30 @@ Default value: `{
     'dir' => 'yes',
     'encrypted' => 'yes',
   }`
+
+##### <a name="allow_net_users"></a>`allow_net_users`
+
+Data type: `Array`
+
+See singularity.conf: `allow net users`
+
+Default value: `[]`
+
+##### <a name="allow_net_groups"></a>`allow_net_groups`
+
+Data type: `Array`
+
+See singularity.conf: `allow net groups`
+
+Default value: `[]`
+
+##### <a name="allow_net_networks"></a>`allow_net_networks`
+
+Data type: `Array`
+
+See singularity.conf: `allow net networks`
+
+Default value: `[]`
 
 ##### <a name="always_use_nv"></a>`always_use_nv`
 

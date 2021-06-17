@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
+## [v5.2.0](https://github.com/treydock/puppet-module-singularity/tree/v5.2.0) (2021-06-17)
+
+[Full Changelog](https://github.com/treydock/puppet-module-singularity/compare/v5.1.0...v5.2.0)
+
+### Added
+
+- Support Singularity 3.8.0, update default version to 3.7.4 [\#27](https://github.com/treydock/puppet-module-singularity/pull/27) ([treydock](https://github.com/treydock))
+
 ## [v5.1.0](https://github.com/treydock/puppet-module-singularity/tree/v5.1.0) (2021-06-14)
 
 [Full Changelog](https://github.com/treydock/puppet-module-singularity/compare/v5.0.0...v5.1.0)
