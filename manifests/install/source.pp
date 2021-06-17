@@ -5,7 +5,11 @@ class singularity::install::source {
 
   if $singularity::manage_go {
     include golang
-    Class['golang'] -> Exec['singularity-mconfig']
+    if $singularity::rebuild_on_go {
+      Class['golang'] ~> Exec['singularity-mconfig']
+    } else {
+      Class['golang'] -> Exec['singularity-mconfig']
+    }
   }
   ensure_packages($singularity::source_dependencies, {'before' => Exec['singularity-mconfig']})
 
@@ -59,7 +63,7 @@ class singularity::install::source {
       cleanup         => true,
       user            => 'root',
       group           => 'root',
-      before          => Exec['singularity-mconfig'],
+      notify          => Exec['singularity-mconfig'],
     }
   exec { 'singularity-mconfig':
     path        => $singularity::source_exec_path,
