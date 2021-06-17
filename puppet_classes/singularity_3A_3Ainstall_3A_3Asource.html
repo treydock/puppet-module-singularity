@@ -175,7 +175,8 @@
 82
 83
 84
-85</pre>
+85
+86</pre>
       </td>
       <td>
         <pre class="code"><span class="info file"># File 'manifests/install/source.pp', line 3</span>
@@ -229,7 +230,8 @@ class singularity::install::source {
     group  =&gt; &#39;root&#39;,
     mode   =&gt; &#39;0755&#39;,
   }
-  -&gt; archive { &quot;/tmp/singularity-${singularity::version}.tar.gz&quot;:
+  -&gt; archive { &#39;singularity-source&#39;:
+      path            =&gt; &quot;/tmp/singularity-${singularity::version}.tar.gz&quot;,
       source          =&gt; &quot;https://github.com/hpcng/singularity/releases/download/v${singularity::version}/singularity-${singularity::version}.tar.gz&quot;,
       extract         =&gt; true,
       extract_path    =&gt; $source_dir,
