@@ -11,12 +11,12 @@ describe 'singularity::plugin' do
       EOS
       pp = <<-EOS
       class { 'singularity':
-        version        => '3.7.4',
+        version        => '3.8.0',
         install_method => 'source',
         # Avoid /etc/localtime which may not exist in minimal Docker environments
         bind_paths     => ['/etc/hosts'],
       }
-      singularity::plugin { 'github.com/sylabs/singularity/log-plugin':
+      singularity::plugin { 'github.com/hpcng/singularity/log-plugin':
         source_dir => 'examples/plugins/log-plugin',
       }
       EOS
@@ -36,7 +36,8 @@ describe 'singularity::plugin' do
     end
   end
 
-  context 'reinstalls log plugin during upgrade' do
+  # TODO: Remove 'if' once something above 3.8.0 is available
+  context 'reinstalls log plugin during upgrade', if: false do
     it 'runs successfully' do
       setup_pp = <<-EOS
       class { 'rsyslog::client':
@@ -51,7 +52,7 @@ describe 'singularity::plugin' do
         # Avoid /etc/localtime which may not exist in minimal Docker environments
         bind_paths     => ['/etc/hosts'],
       }
-      singularity::plugin { 'github.com/sylabs/singularity/log-plugin':
+      singularity::plugin { 'github.com/hpcng/singularity/log-plugin':
         source_dir => 'examples/plugins/log-plugin',
       }
       EOS
