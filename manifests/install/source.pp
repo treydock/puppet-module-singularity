@@ -49,7 +49,8 @@ class singularity::install::source {
     group  => 'root',
     mode   => '0755',
   }
-  -> archive { "/tmp/singularity-${singularity::version}.tar.gz":
+  -> archive { 'singularity-source':
+      path            => "/tmp/singularity-${singularity::version}.tar.gz",
       source          => "https://github.com/hpcng/singularity/releases/download/v${singularity::version}/singularity-${singularity::version}.tar.gz",
       extract         => true,
       extract_path    => $source_dir,
