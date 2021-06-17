@@ -23,6 +23,9 @@
 # @param manage_go
 #   Sets if golang module should be included
 #   Only used when install_method=source
+# @param rebuild_on_go
+#   Sets if Singularity should be rebuilt on updates to Go via golang module
+#   Only used when install_method=source and manage_go=true
 # @param source_base_dir
 #   Base directory of where Singularity source will be extracted
 #   Only used when install_method=source
@@ -150,6 +153,7 @@ class singularity (
   String $version = '3.7.4',
   Array $source_dependencies = [],
   Boolean $manage_go = true,
+  Boolean $rebuild_on_go = true,
   Stdlib::Absolutepath $source_base_dir = '/opt',
   Stdlib::Absolutepath $source_mconfig_path = '/usr/local/sbin/singularity-mconfig.sh',
   Hash $build_flags = {},
