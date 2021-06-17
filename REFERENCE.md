@@ -45,6 +45,7 @@ The following parameters are available in the `singularity` class:
 * [`version`](#version)
 * [`source_dependencies`](#source_dependencies)
 * [`manage_go`](#manage_go)
+* [`rebuild_on_go`](#rebuild_on_go)
 * [`source_base_dir`](#source_base_dir)
 * [`source_mconfig_path`](#source_mconfig_path)
 * [`build_flags`](#build_flags)
@@ -159,6 +160,15 @@ Data type: `Boolean`
 
 Sets if golang module should be included
 Only used when install_method=source
+
+Default value: ``true``
+
+##### <a name="rebuild_on_go"></a>`rebuild_on_go`
+
+Data type: `Boolean`
+
+Sets if Singularity should be rebuilt on updates to Go via golang module
+Only used when install_method=source and manage_go=true
 
 Default value: ``true``
 
