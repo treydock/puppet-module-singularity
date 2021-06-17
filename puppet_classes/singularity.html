@@ -224,6 +224,25 @@ install_method=source</p>
   
     <li>
       
+        <span class='name'>rebuild_on_go</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>true</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Sets if Singularity should be rebuilt on updates to Go via golang module
+Only used when install_method=source and manage_go=true</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
         <span class='name'>source_base_dir</span>
       
       
@@ -1218,9 +1237,6 @@ For each user by start + namespace_id_range + 1</p>
         <pre class="lines">
 
 
-143
-144
-145
 146
 147
 148
@@ -1299,10 +1315,14 @@ For each user by start + namespace_id_range + 1</p>
 221
 222
 223
-224</pre>
+224
+225
+226
+227
+228</pre>
       </td>
       <td>
-        <pre class="code"><span class="info file"># File 'manifests/init.pp', line 143</span>
+        <pre class="code"><span class="info file"># File 'manifests/init.pp', line 146</span>
 
 class singularity (
   Enum[&#39;package&#39;,&#39;source&#39;] $install_method = &#39;package&#39;,
@@ -1314,6 +1334,7 @@ class singularity (
   String $version = &#39;3.7.4&#39;,
   Array $source_dependencies = [],
   Boolean $manage_go = true,
+  Boolean $rebuild_on_go = true,
   Stdlib::Absolutepath $source_base_dir = &#39;/opt&#39;,
   Stdlib::Absolutepath $source_mconfig_path = &#39;/usr/local/sbin/singularity-mconfig.sh&#39;,
   Hash $build_flags = {},

@@ -176,7 +176,11 @@
 83
 84
 85
-86</pre>
+86
+87
+88
+89
+90</pre>
       </td>
       <td>
         <pre class="code"><span class="info file"># File 'manifests/install/source.pp', line 3</span>
@@ -186,7 +190,11 @@ class singularity::install::source {
 
   if $singularity::manage_go {
     include golang
-    Class[&#39;golang&#39;] -&gt; Exec[&#39;singularity-mconfig&#39;]
+    if $singularity::rebuild_on_go {
+      Class[&#39;golang&#39;] ~&gt; Exec[&#39;singularity-mconfig&#39;]
+    } else {
+      Class[&#39;golang&#39;] -&gt; Exec[&#39;singularity-mconfig&#39;]
+    }
   }
   ensure_packages($singularity::source_dependencies, {&#39;before&#39; =&gt; Exec[&#39;singularity-mconfig&#39;]})
 
@@ -240,7 +248,7 @@ class singularity::install::source {
       cleanup         =&gt; true,
       user            =&gt; &#39;root&#39;,
       group           =&gt; &#39;root&#39;,
-      before          =&gt; Exec[&#39;singularity-mconfig&#39;],
+      notify          =&gt; Exec[&#39;singularity-mconfig&#39;],
     }
   exec { &#39;singularity-mconfig&#39;:
     path        =&gt; $singularity::source_exec_path,
