@@ -199,10 +199,47 @@ limit container paths = <%= scope['singularity::limit_container_paths'].join(', 
 allow container <%= type %> = <%= value %>
 <%- end -%>
 
+# ALLOW NET USERS: [STRING]
+# DEFAULT: NULL
+# Allow specified root administered CNI network configurations to be used by the
+# specified list of users. By default only root may use CNI configuration,
+# except in the case of a fakeroot execution where only 40_fakeroot.conflist
+# is used. This feature only applies when Singularity is running in
+# SUID mode and the user is non-root.
+#allow net users = gmk, singularity
+<%- unless scope['singularity::allow_net_users'].empty? -%>
+allow net users = <%= scope['singularity::allow_net_users'].join(', ') %>
+<%- end -%>
+
+
+# ALLOW NET GROUPS: [STRING]
+# DEFAULT: NULL
+# Allow specified root administered CNI network configurations to be used by the
+# specified list of users. By default only root may use CNI configuration,
+# except in the case of a fakeroot execution where only 40_fakeroot.conflist
+# is used. This feature only applies when Singularity is running in
+# SUID mode and the user is non-root.
+#allow net groups = group1, singularity
+<%- unless scope['singularity::allow_net_groups'].empty? -%>
+allow net groups = <%= scope['singularity::allow_net_groups'].join(', ') %>
+<%- end -%>
+
+
+# ALLOW NET NETWORKS: [STRING]
+# DEFAULT: NULL
+# Specify the names of CNI network configurations that may be used by users and
+# groups listed in the allow net users / allow net groups directives. Thus feature
+# only applies when Singularity is running in SUID mode and the user is non-root.
+#allow net networks = bridge
+<%- unless scope['singularity::allow_net_networks'].empty? -%>
+allow net networks = <%= scope['singularity::allow_net_networks'].join(', ') %>
+<%- end -%>
+
+
 # ALWAYS USE NV ${TYPE}: [BOOL]
 # DEFAULT: no
 # This feature allows an administrator to determine that every action command
-# should be executed implicitely with the --nv option (useful for GPU only 
+# should be executed implicitly with the --nv option (useful for GPU only 
 # environments). 
 always use nv = <%= scope['singularity::always_use_nv'] %>
 
@@ -257,7 +294,7 @@ mksquashfs path = <%= scope['singularity::mksquashfs_path'] %>
 
 # MKSQUASHFS PROCS: [UINT]
 # DEFAULT: 0 (All CPUs)
-# This allows the administrator to specify the number of CPUs for mksquashfs
+# This allows the administrator to specify the number of CPUs for mksquashfs 
 # to use when building an image.  The fewer processors the longer it takes.
 # To enable it to use all available CPU's set this to 0.
 # mksquashfs procs = 0
@@ -304,5 +341,5 @@ shared loop devices = <%= scope['singularity::shared_loop_devices'] %>
 <%- if scope['singularity::image_driver'] -%>
 image driver = <%= scope['singularity::image_driver'] %>
 <%- else -%>
-image driver =
+image driver = 
 <%- end -%>

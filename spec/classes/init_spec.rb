@@ -95,7 +95,7 @@ describe 'singularity' do
                                   'memory fs type = tmpfs',
                                   'mksquashfs procs = 0',
                                   'shared loop devices = no',
-                                  'image driver =',
+                                  'image driver = ',
                                 ])
         end
 

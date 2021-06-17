@@ -28,7 +28,7 @@ describe 'singularity class:' do
   end
 
   context 'source install' do
-    let(:version) { '3.7.1' }
+    let(:version) { '3.7.4' }
 
     it 'runs successfully' do
       pp = <<-EOS
@@ -65,7 +65,7 @@ describe 'singularity class:' do
   end
 
   context 'upgrade' do
-    let(:version) { '3.7.4' }
+    let(:version) { '3.8.0' }
 
     it 'runs successfully' do
       pp = <<-EOS
@@ -91,10 +91,15 @@ describe 'singularity class:' do
     describe command('singularity version') do
       its(:stdout) { is_expected.to include(version) }
     end
+
+    describe command('singularity exec library://alpine cat /etc/alpine-release') do
+      its(:exit_status) { is_expected.to eq(0) }
+      its(:stdout) { is_expected.to match %r{[0-9]+.[0-9]+.[0-9]+} }
+    end
   end
 
   context 'downgrade' do
-    let(:version) { '3.7.1' }
+    let(:version) { '3.7.4' }
 
     it 'runs successfully' do
       pp = <<-EOS

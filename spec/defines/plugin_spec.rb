@@ -22,8 +22,8 @@ describe 'singularity::plugin' do
           path: '/usr/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin',
           environment: ['HOME=/root'],
           command: 'singularity plugin compile examples/plugins/log-plugin',
-          cwd: '/opt/singularity-3.7.1',
-          creates: '/opt/singularity-3.7.1/examples/plugins/log-plugin/log-plugin.sif',
+          cwd: '/opt/singularity-3.7.4',
+          creates: '/opt/singularity-3.7.4/examples/plugins/log-plugin/log-plugin.sif',
           require: 'Class[Singularity::Install::Source]',
         )
       end
@@ -33,8 +33,8 @@ describe 'singularity::plugin' do
           path: '/usr/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin',
           environment: ['HOME=/root'],
           command: 'singularity plugin compile examples/plugins/log-plugin',
-          cwd: '/opt/singularity-3.7.1',
-          onlyif: 'test -f /opt/singularity-3.7.1/examples/plugins/log-plugin/log-plugin.sif',
+          cwd: '/opt/singularity-3.7.4',
+          onlyif: 'test -f /opt/singularity-3.7.4/examples/plugins/log-plugin/log-plugin.sif',
           refreshonly: 'true',
           require: 'Class[Singularity::Install::Source]',
           notify: 'Exec[singularity-plugin-reinstall-github.com/sylabs/singularity/log-plugin]',
@@ -44,7 +44,7 @@ describe 'singularity::plugin' do
       it do
         is_expected.to contain_exec('singularity-plugin-install-github.com/sylabs/singularity/log-plugin').with(
           path: '/usr/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin',
-          command: 'singularity plugin install /opt/singularity-3.7.1/examples/plugins/log-plugin/log-plugin.sif',
+          command: 'singularity plugin install /opt/singularity-3.7.4/examples/plugins/log-plugin/log-plugin.sif',
           unless: "singularity plugin list | grep 'github.com/sylabs/singularity/log-plugin'",
           require: 'Exec[singularity-plugin-compile-github.com/sylabs/singularity/log-plugin]',
         )
@@ -53,7 +53,7 @@ describe 'singularity::plugin' do
       it do
         is_expected.to contain_exec('singularity-plugin-reinstall-github.com/sylabs/singularity/log-plugin').with(
           path: '/usr/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin',
-          command: 'singularity plugin install /opt/singularity-3.7.1/examples/plugins/log-plugin/log-plugin.sif',
+          command: 'singularity plugin install /opt/singularity-3.7.4/examples/plugins/log-plugin/log-plugin.sif',
           onlyif: "singularity plugin list | grep 'github.com/sylabs/singularity/log-plugin'",
           refreshonly: 'true',
           subscribe: 'Exec[singularity-plugin-compile-github.com/sylabs/singularity/log-plugin]',
