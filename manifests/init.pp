@@ -100,6 +100,12 @@
 #   See singularity.conf: `limit container paths`
 # @param allow_containers
 #   See singularity.conf: `allow containers`
+# @param allow_net_users
+#   See singularity.conf: `allow net users`
+# @param allow_net_groups
+#   See singularity.conf: `allow net groups`
+# @param allow_net_networks
+#   See singularity.conf: `allow net networks`
 # @param always_use_nv
 #   See singularity.conf: `always use nv`
 # @param always_use_rocm
@@ -141,7 +147,7 @@ class singularity (
   String $package_name = 'singularity',
   Boolean $manage_epel = true,
   # Source install
-  String $version = '3.7.1',
+  String $version = '3.7.4',
   Array $source_dependencies = [],
   Boolean $manage_go = true,
   Stdlib::Absolutepath $source_base_dir = '/opt',
@@ -185,6 +191,9 @@ class singularity (
     'dir' => 'yes',
     'encrypted' => 'yes',
   },
+  Array $allow_net_users = [],
+  Array $allow_net_groups = [],
+  Array $allow_net_networks = [],
   Enum['yes','no'] $always_use_nv = 'no',
   Enum['yes','no'] $always_use_rocm = 'no',
   Enum['full','file','default','no'] $root_default_capabilities = 'full',

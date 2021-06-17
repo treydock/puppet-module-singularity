@@ -11,7 +11,7 @@ describe 'singularity::plugin' do
       EOS
       pp = <<-EOS
       class { 'singularity':
-        version        => '3.7.1',
+        version        => '3.7.4',
         install_method => 'source',
         # Avoid /etc/localtime which may not exist in minimal Docker environments
         bind_paths     => ['/etc/hosts'],
@@ -46,7 +46,7 @@ describe 'singularity::plugin' do
       EOS
       pp = <<-EOS
       class { 'singularity':
-        version        => '3.7.4',
+        version        => '3.8.0',
         install_method => 'source',
         # Avoid /etc/localtime which may not exist in minimal Docker environments
         bind_paths     => ['/etc/hosts'],
