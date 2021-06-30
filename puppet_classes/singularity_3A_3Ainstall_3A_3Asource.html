@@ -180,7 +180,10 @@
 87
 88
 89
-90</pre>
+90
+91
+92
+93</pre>
       </td>
       <td>
         <pre class="code"><span class="info file"># File 'manifests/install/source.pp', line 3</span>
@@ -196,7 +199,10 @@ class singularity::install::source {
       Class[&#39;golang&#39;] -&gt; Exec[&#39;singularity-mconfig&#39;]
     }
   }
-  ensure_packages($singularity::source_dependencies, {&#39;before&#39; =&gt; Exec[&#39;singularity-mconfig&#39;]})
+  ensure_packages($singularity::source_dependencies)
+  $singularity::source_dependencies.each |$package| {
+    Package[$package] -&gt; Exec[&#39;singularity-mconfig&#39;]
+  }
 
   $source_dir = &quot;${singularity::source_base_dir}/singularity-${singularity::version}&quot;
   $base_build_flags = {
