@@ -11,7 +11,10 @@ class singularity::install::source {
       Class['golang'] -> Exec['singularity-mconfig']
     }
   }
-  ensure_packages($singularity::source_dependencies, {'before' => Exec['singularity-mconfig']})
+  ensure_packages($singularity::source_dependencies)
+  $singularity::source_dependencies.each |$package| {
+    Package[$package] -> Exec['singularity-mconfig']
+  }
 
   $source_dir = "${singularity::source_base_dir}/singularity-${singularity::version}"
   $base_build_flags = {
