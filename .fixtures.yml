@@ -1,12 +1,14 @@
+# This file can be used to install module dependencies for unit testing
+# See https://github.com/puppetlabs/puppetlabs_spec_helper#using-fixtures for details
+---
 fixtures:
-  repositories:
+  forge_modules:
     stdlib:
-      repo: https://github.com/puppetlabs/puppetlabs-stdlib.git
-      ref: 4.13.1
+      repo: "puppetlabs/stdlib"
     epel:
-      repo: https://github.com/stahnma/puppet-module-epel.git
+      repo: "puppet/epel"
     yumrepo_core:
-      repo: https://github.com/puppetlabs/puppetlabs-yumrepo_core.git
+      repo: "puppetlabs/yumrepo_core"
       puppet_version: ">= 6.0.0"
   symlinks:
     singularity: "#{source_dir}"
