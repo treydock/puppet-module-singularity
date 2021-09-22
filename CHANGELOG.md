@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
+## [v5.4.0](https://github.com/treydock/puppet-module-singularity/tree/v5.4.0) (2021-09-22)
+
+[Full Changelog](https://github.com/treydock/puppet-module-singularity/compare/v5.3.1...v5.4.0)
+
+### Added
+
+- Bump upper version limit for the stdlib dependency [\#32](https://github.com/treydock/puppet-module-singularity/pull/32) ([mrolli](https://github.com/mrolli))
+
 ## [v5.3.1](https://github.com/treydock/puppet-module-singularity/tree/v5.3.1) (2021-06-30)
 
 [Full Changelog](https://github.com/treydock/puppet-module-singularity/compare/v5.3.0...v5.3.1)
