@@ -38,6 +38,10 @@ define singularity::plugin (
     $_sif_name = pick($sif_name, "${basename}.sif")
     $sif_path = "${singularity::install::source::source_dir}/${source_dir}/${_sif_name}"
 
+    if $singularity::manage_go and $singularity::rebuild_on_go {
+      Class['golang'] ~> Exec["singularity-plugin-recompile-${name}"]
+    }
+
     exec { "singularity-plugin-compile-${name}":
       path        => $exec_path,
       environment => $singularity::install::source::build_env,
