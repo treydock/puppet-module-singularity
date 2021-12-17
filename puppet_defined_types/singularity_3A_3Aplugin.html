@@ -242,7 +242,11 @@ plugin <code>examples/plugins/log-plugin</code> will have SIF name of
 90
 91
 92
-93</pre>
+93
+94
+95
+96
+97</pre>
       </td>
       <td>
         <pre class="code"><span class="info file"># File 'manifests/plugin.pp', line 19</span>
@@ -268,6 +272,10 @@ define singularity::plugin (
     $basename = split($name, &#39;/&#39;)[-1]
     $_sif_name = pick($sif_name, &quot;${basename}.sif&quot;)
     $sif_path = &quot;${singularity::install::source::source_dir}/${source_dir}/${_sif_name}&quot;
+
+    if $singularity::manage_go and $singularity::rebuild_on_go {
+      Class[&#39;golang&#39;] ~&gt; Exec[&quot;singularity-plugin-recompile-${name}&quot;]
+    }
 
     exec { &quot;singularity-plugin-compile-${name}&quot;:
       path        =&gt; $exec_path,
