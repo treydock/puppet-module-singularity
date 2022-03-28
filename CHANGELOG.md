@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
+## [v5.5.0](https://github.com/treydock/puppet-module-singularity/tree/v5.5.0) (2022-03-28)
+
+[Full Changelog](https://github.com/treydock/puppet-module-singularity/compare/v5.4.1...v5.5.0)
+
+### Added
+
+- Drop CentOS 8 support, add Rocky 8 support [\#34](https://github.com/treydock/puppet-module-singularity/pull/34) ([treydock](https://github.com/treydock))
+
 ## [v5.4.1](https://github.com/treydock/puppet-module-singularity/tree/v5.4.1) (2021-12-17)
 
 [Full Changelog](https://github.com/treydock/puppet-module-singularity/compare/v5.4.0...v5.4.1)
