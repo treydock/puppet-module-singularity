@@ -3,7 +3,7 @@
   acceptance_matrix:
     set:
       - centos-7
-      - centos-8
+      - rocky-8
       - debian-9
       - debian-10
       - ubuntu-1804
@@ -11,6 +11,4 @@
 .gitlab-ci.yml:
   delete: true
 appveyor.yml:
-  delete: true
-spec/acceptance/nodesets/ubuntu-1604.yml:
   delete: true
