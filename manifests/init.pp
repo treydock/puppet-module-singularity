@@ -129,6 +129,8 @@
 #   See singularity.conf: `mksquashfs mem`
 # @param cryptsetup_path
 #   See singularity.conf: `cryptsetup path`
+# @param ldconfig_path
+#   See singularity.conf: `ldconfig path`
 # @param shared_loop_devices
 #   See singularity.conf: `shared loop devices`
 # @param image_driver
@@ -208,6 +210,7 @@ class singularity (
   Integer[0,default] $mksquashfs_procs = 0,
   Optional[String[1]] $mksquashfs_mem = undef,
   Optional[Stdlib::Absolutepath] $cryptsetup_path = undef,
+  Optional[Stdlib::Absolutepath] $ldconfig_path = undef,
   Enum['yes','no'] $shared_loop_devices = 'no',
   Optional[String] $image_driver = undef,
   Array $namespace_users = [],
