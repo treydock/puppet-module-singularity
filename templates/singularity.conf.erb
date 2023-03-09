@@ -343,3 +343,12 @@ image driver = <%= scope['singularity::image_driver'] %>
 <%- else -%>
 image driver = 
 <%- end -%>
+
+# LDCONFIG PATH: [STRING]
+# DEFAULT: Undefined
+# Path to the ldconfig executable, used to find GPU libraries.
+# Must be set to use --nv / --nvccli.
+# Executable must be owned by root for security reasons.
+<%- if scope['singularity::ldconfig_path'] -%>
+ldconfig path = <%= scope['singularity::ldconfig_path'] %>
+<%- end -%>

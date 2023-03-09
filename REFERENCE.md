@@ -94,6 +94,7 @@ The following parameters are available in the `singularity` class:
 * [`mksquashfs_procs`](#mksquashfs_procs)
 * [`mksquashfs_mem`](#mksquashfs_mem)
 * [`cryptsetup_path`](#cryptsetup_path)
+* [`ldconfig_path`](#ldconfig_path)
 * [`shared_loop_devices`](#shared_loop_devices)
 * [`image_driver`](#image_driver)
 * [`namespace_users`](#namespace_users)
@@ -565,6 +566,14 @@ Default value: ``undef``
 Data type: `Optional[Stdlib::Absolutepath]`
 
 See singularity.conf: `cryptsetup path`
+
+Default value: ``undef``
+
+##### <a name="ldconfig_path"></a>`ldconfig_path`
+
+Data type: `Optional[Stdlib::Absolutepath]`
+
+See singularity.conf: `ldconfig path`
 
 Default value: ``undef``
 
